@@ -1,24 +1,19 @@
 const path = require('path');
 
-const config = {
+module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'webpack-bundle.js',
+    path: path.join(__dirname, 'public'),
+    publicPath: '/public/',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
-      },
-    ],
-  },
-  mode: 'development',
-  devServer: {
-    contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'build')],
-  },
+        use: 'babel-loader'
+      }
+    ]
+  }
 };
-
-module.exports = config;
