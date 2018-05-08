@@ -12,12 +12,17 @@ const composeController = {}
 // res.sendFile(path.resolve(__dirname, '../../public/index.html'))
 
 composeController.ps = (req, res, next) => {
-  let docker = new Docker();
-
-  docker.command('ps', (err, data) => {
-    res.send(data.raw);
-    // res.send('TESTING PS!');
-    res.end();
+  exec('docker ps', (err, stout, sterr) => {
+    const spaces = stout.replace(/ {2,}/g, '   ')
+    var data = Papa.parse(spaces, {
+      delimiter: "  ",
+      header: true,
+      newline: "",
+      skipEmptyLines: true
+    });
+    const info = []
+    // console.log(data.data)
+    res.send(data.data);
   })
 }
 

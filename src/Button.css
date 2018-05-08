@@ -1,0 +1,9 @@
+.button {
+  width: 200px;
+  height: 100px;
+  color: white;
+  background-color: red;
+  font-size: 2rem;
+  font-family: system-ui;
+  display: flex;
+}
