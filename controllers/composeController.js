@@ -1,6 +1,25 @@
+var dockerCLI = require('docker-cli-js');
+var DockerOptions = dockerCLI.Options;
+var Docker = dockerCLI.Docker;
 
+const exec = require('child_process').exec
+const Papa = require('papaparse')
+const path = require('path');
 
 const composeController = {}
+
+// app.use(express.static(__dirname + 'public/'));
+// res.sendFile(path.resolve(__dirname, '../../public/index.html'))
+
+composeController.ps = (req, res, next) => {
+  let docker = new Docker();
+
+  docker.command('ps', (err, data) => {
+    res.send(data.raw);
+    // res.send('TESTING PS!');
+    res.end();
+  })
+}
 
 composeController.folder = (req, res, next) => {
   const folder = req.body.folder
@@ -11,7 +30,8 @@ composeController.dcup = (req, res, next) => {
   exec('docker-compose up', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log()
+    res.end();
+    res.end();
   })
 }
 
@@ -19,7 +39,7 @@ composeController.dcdwn = (req, res, next) => {
   exec('docker-compose down', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log()
+    res.end();
   })
 }
 
@@ -27,7 +47,7 @@ composeController.dcstrt = (req, res, next) => {
   exec('docker-compose start', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log()
+    res.end();
   })
 }
 
@@ -35,7 +55,7 @@ composeController.dcstp = (req, res, next) => {
   exec('docker-compose stop', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log()
+    res.end();
   })
 }
 
@@ -44,7 +64,7 @@ composeController.dcfile = (req, res, next) => {
   exec(`cat ${dcFilePath}`, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log()
+    res.end();
   })
 }
 
@@ -59,7 +79,8 @@ composeController.psa = (req, res, next) => {
       skipEmptyLines: true
     });
     const info = []
-    console.log(data.data)
+    // console.log(data.data)
+    res.send(data.data);
   })
 }
 

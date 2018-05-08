@@ -4,14 +4,20 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack && webpack-dev-server",
+    "webpack": "webpack --watch",
     "electron": "electron ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "docker-cli-js": "^2.2.0",
     "electron": "^2.0.0",
+    "install": "^0.11.0",
+    "npm": "^6.0.0",
+    "papaparse": "^4.4.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },
