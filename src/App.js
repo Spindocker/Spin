@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ComponentsArea from './ComponentsArea';
+import './ComponentsArea.css';
+
 
 class App extends Component {
   constructor(props) {
@@ -6,6 +9,7 @@ class App extends Component {
     this.state = {
       containers: [],
     };
+    this.showIds = this.showIds.bind(this);
   }
 
   componentDidMount() {
@@ -22,11 +26,14 @@ class App extends Component {
       });
   }
 
+  showIds(arr) {
+    return this.state.containers.map(container => <p className="containers">Container ID: {container['CONTAINER ID']}</p>);
+  }
+
   render() {
     return (
       <div>
-        <h1>Compose GUI</h1>
-        ${this.state.containers}
+        <ComponentsArea comIds={this.showIds()} />
       </div>
     );
   }
