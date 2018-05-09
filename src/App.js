@@ -10,8 +10,10 @@ class App extends Component {
       containers: [],
     };
     this.showIds = this.showIds.bind(this);
-    this.composeUp = this.composeUp.bind(this);
+    this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
+    this.dcup = this.dcup.bind(this);
+    this.dcdwn = this.dcdwn.bind(this);
   }
 
   componentDidMount() {
@@ -32,13 +34,29 @@ class App extends Component {
     return this.state.containers.map(container => <p key={container['CONTAINER ID']} className="containers">Container ID: {container['CONTAINER ID']}</p>);
   }
 
-  composeUp() {
-    fetch('/docker-ps', {
+  dcup() {
+    fetch('/dcup', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(res => res.json())
+    })
+  }
+  dcdwn() {
+    fetch('/dcdwn', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+  ps() {
+    fetch('/docker-ps', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => res.json())
       .then((data) => {
         this.setState({
           containers: data,
@@ -49,11 +67,11 @@ class App extends Component {
 
   psa() {
     fetch('/psa', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.json())
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => res.json())
       .then((data) => {
         this.setState({
           containers: data,
@@ -70,7 +88,12 @@ class App extends Component {
       <button id="submit" type="submit">Submit file path</button>
     </form>
         <ComponentsArea comIds={this.showIds()} />
-        <Controls composeUp={this.composeUp} psa={this.psa} />
+        <Controls 
+          ps={this.ps} 
+          psa={this.psa} 
+          dcup = {this.dcup} 
+          dcdwn = {this.dcdwn} 
+          /> 
       </div>
     );
   }
