@@ -42,8 +42,3 @@ exec('docker ps -a', (err, stout, sterr) => {
 app.listen(3333, () => {
   console.log('Listening on Port 3333!')
 });
-
-
-
-
-  
