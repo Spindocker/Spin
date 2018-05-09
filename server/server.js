@@ -24,7 +24,7 @@ app.get('/dcup', composeController.dcup)
 app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
 app.get('/dcstp', composeController.dcstp)
-app.get('/dcfolder', composeController.folder)
+app.post('/dcfolder', composeController.dcfolder)
 app.get('/dcfile', composeController.dcfile)
 
 exec('docker ps -a', (err, stout, sterr) => {

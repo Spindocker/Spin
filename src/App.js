@@ -12,7 +12,6 @@ class App extends Component {
     this.showIds = this.showIds.bind(this);
     this.composeUp = this.composeUp.bind(this);
     this.psa = this.psa.bind(this);
-    this.sendFilePath = this.sendFilePath.bind(this)
   }
 
   componentDidMount() {
@@ -61,24 +60,15 @@ class App extends Component {
         });
       });
   }
-  sendFilePath(e) {
-    e.preventDefault()
-    console.log(e.target)
-    fetch('/dcfolder', {
-      method: 'POST',
-    }).then(res => console.log('changed directory'))
-  }
 
   render() {
     return (
       <div>
-        <form onSubmit = {this.sendFilePath}>
-          <label>
-            File path for compose file
-            <input type="text" name="filepath"/>
-           </label>
-          <button ref = "formPath"> proceed </button>
-           </form>
+
+      <form id="filePathForm" action="/dcfolder" method="POST">
+      <input id="filePathInput" name="filePath" placeholder="file path" type="text" />
+      <button id="submit" type="submit">Submit file path</button>
+    </form>
         <ComponentsArea comIds={this.showIds()} />
         <Controls composeUp={this.composeUp} psa={this.psa} />
       </div>

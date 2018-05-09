@@ -2,6 +2,7 @@ var dockerCLI = require('docker-cli-js');
 var DockerOptions = dockerCLI.Options;
 var Docker = dockerCLI.Docker;
 
+
 const exec = require('child_process').exec
 const Papa = require('papaparse')
 const path = require('path');
@@ -24,9 +25,11 @@ composeController.ps = (req, res, next) => {
   })
 }
 
-composeController.folder = (req, res, next) => {
+composeController.dcfolder = (req, res, next) => {
+  res.send(req.body)
   const folder = req.body.folder
   exec(`cd ${folder}`)
+  res.end()
 }
 
 composeController.dcup = (req, res, next) => {
