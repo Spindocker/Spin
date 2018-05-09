@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
-import './ComponentsArea.css';
 
 class App extends Component {
   constructor(props) {
