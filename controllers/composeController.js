@@ -2,7 +2,9 @@ var dockerCLI = require('docker-cli-js');
 var DockerOptions = dockerCLI.Options;
 var Docker = dockerCLI.Docker;
 
+
 const exec = require('child_process').exec
+const spawn = require('child_process').spawn
 const Papa = require('papaparse')
 const path = require('path');
 
@@ -20,23 +22,25 @@ composeController.ps = (req, res, next) => {
       newline: "",
       skipEmptyLines: true
     });
-    const info = []
-    // console.log(data.data)
     res.send(data.data);
   })
 }
 
-composeController.folder = (req, res, next) => {
+composeController.dcfolder = (req, res, next) => {
   const folder = req.body.folder
-  exec(`cd ${folder}`)
+  spawn(`cd ${folder}`)
+  res.redirect('/')
+  res.end()
 }
 
 composeController.dcup = (req, res, next) => {
   exec('docker-compose up', (err, stout, sterr) => {
+    console.log(stout)
+    console.log()
     if (err) console.log(err);
     if (sterr) console.log(sterr);
     res.end();
-    res.end();
+    // res.end();
   })
 }
 
@@ -84,7 +88,6 @@ composeController.psa = (req, res, next) => {
       skipEmptyLines: true
     });
     const info = []
-    // console.log(data.data)
     res.send(data.data);
   })
 }
