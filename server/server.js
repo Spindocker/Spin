@@ -11,7 +11,7 @@ var dockerCLI = require('docker-cli-js');
 var DockerOptions = dockerCLI.Options;
 var Docker = dockerCLI.Docker;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
@@ -35,8 +35,6 @@ exec('docker ps -a', (err, stout, sterr) => {
     newline: "",
     skipEmptyLines: true
   });
-  const info = []
-  console.log(data.data)
 })
 
 app.listen(3333, () => {

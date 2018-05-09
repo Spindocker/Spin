@@ -20,8 +20,6 @@ composeController.ps = (req, res, next) => {
       newline: "",
       skipEmptyLines: true
     });
-    const info = []
-    // console.log(data.data)
     res.send(data.data);
   })
 }
@@ -84,7 +82,6 @@ composeController.psa = (req, res, next) => {
       skipEmptyLines: true
     });
     const info = []
-    // console.log(data.data)
     res.send(data.data);
   })
 }
