@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 import './Controls.css';
 
-const Controls = ({ ps, psa, up }) => (
+const Controls = ({ ps, psa, up, stop }) => (
   <div id="controlsBar">
     <form id="filePathForm" action="/sendFilePath" method="POST">
       <input id="filePathInput" name="filePath" placeholder="file path" type="text" />
@@ -12,6 +12,7 @@ const Controls = ({ ps, psa, up }) => (
     <Button name="ps" click={ps} />
     <Button name="ps -a" click={psa} />
     <Button name="up" click={up} />
+    <Button name="stop" click={stop} />
   </div>
 );
 

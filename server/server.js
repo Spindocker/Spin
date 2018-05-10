@@ -23,7 +23,7 @@ app.get('/psa', composeController.psa)
 app.get('/dcup', composeController.dcup)
 app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
-app.get('/dcstp', composeController.dcstp)
+app.get('/dcstop', composeController.dcstp)
 app.get('/dcfolder', composeController.folder)
 app.get('/dcfile', composeController.dcfile)
 

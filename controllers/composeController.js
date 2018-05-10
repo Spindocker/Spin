@@ -59,7 +59,7 @@ composeController.dcstrt = (req, res, next) => {
 }
 
 composeController.dcstp = (req, res, next) => {
-  exec('docker-compose stop', (err, stout, sterr) => {
+  exec('docker stop $(docker ps -aq)', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
     res.end();

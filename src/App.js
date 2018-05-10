@@ -12,6 +12,7 @@ class App extends Component {
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
     this.up = this.up.bind(this);
+    this.stop = this.stop.bind(this);
   }
 
   // componentDidMount() {
@@ -72,11 +73,25 @@ class App extends Component {
     });
   }
 
+  stop() {
+    fetch('/dcstop', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => {
+      this.setState({
+        containers: [],
+        currentViewName: 'Containers online',
+      });
+    });
+  }
+
   render() {
     return (
       <div>
         <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
-        <Controls ps={this.ps} psa={this.psa} up={this.up} />
+        <Controls ps={this.ps} psa={this.psa} up={this.up} stop={this.stop} />
       </div>
     );
   }
