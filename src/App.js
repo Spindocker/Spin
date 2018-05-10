@@ -11,24 +11,10 @@ class App extends Component {
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
+
     this.up = this.up.bind(this);
     this.stop = this.stop.bind(this);
   }
-
-  // componentDidMount() {
-  //   fetch('/psa', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   }).then(res => res.json())
-  //     .then((data) => {
-  //       this.setState({
-  //         containers: data,
-  //         currentViewName: '',
-  //       });
-  //     });
-  // }
 
   showIds(arr) {
     return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
@@ -36,11 +22,28 @@ class App extends Component {
 
   ps() {
     fetch('/docker-ps', {
+
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(res => res.json())
+    })
+  }
+  dcdwn() {
+    fetch('/dcdwn', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+  ps() {
+    fetch('/docker-ps', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => res.json())
       .then((data) => {
         this.setState({
           containers: data,
@@ -51,11 +54,11 @@ class App extends Component {
 
   psa() {
     fetch('/psa', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.json())
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => res.json())
       .then((data) => {
         this.setState({
           containers: data,
@@ -92,6 +95,7 @@ class App extends Component {
       <div>
         <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
         <Controls ps={this.ps} psa={this.psa} up={this.up} stop={this.stop} />
+
       </div>
     );
   }
