@@ -1,15 +1,42 @@
 .containers {
-  width: 300px;
-  height: 300px;
-  background-color: lightblue;
-  color: white;
-  font-size: 2rem;
-  text-align: center;
-  font-family: system-ui;
+  width: 250px;
+  height: 250px;
+  background-color: rgb(159, 203, 249);
   float: right;
   margin: 5px;
+  margin-top: 5%;
+  display: block;
+  border-radius: 100%;
+}
+
+.containers:hover {
+  background-color: rgb(50, 113, 181);
 }
 
 #title {
+  font-family: 'Raleway', sans-serif;
+  display: inline-block;
+  margin-left: 35%;
+  position: fixed;
+  width: 100%
+}
+
+#componentView {
+  float: right;
+  height: 100%;
+  width: 85%;
+  display: block;
+  top: 0;
+}
+
+.containerText {
+  color: white;
+  font-size: 1rem;
   text-align: center;
+  font-family: system-ui;
+  position: relative;
+  float: left;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

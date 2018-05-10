@@ -8,8 +8,8 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
-  mainWindow.loadURL(process.env.ELECTRON_START_URL ||
+  mainWindow = new BrowserWindow({ width: 1600, height: 1200 });
+  mainWindow.loadURL('http://localhost:3333/' || process.env.ELECTRON_START_URL ||
     url.format({
       pathname: path.join(__dirname, '/../build/index.html'),
       protocol: 'file:',

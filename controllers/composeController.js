@@ -10,9 +10,6 @@ const path = require('path');
 
 const composeController = {}
 
-// app.use(express.static(__dirname + 'public/'));
-// res.sendFile(path.resolve(__dirname, '../../public/index.html'))
-
 composeController.ps = (req, res, next) => {
   exec('docker ps', (err, stout, sterr) => {
     const spaces = stout.replace(/ {2,}/g, '   ')
@@ -31,24 +28,26 @@ composeController.dcfolder = (req, res, next) => {
   // res.send(req.body.filePath);
   const folder = req.body.folder
   // spawn(`cd ${folder}`)
-  res.redirect('/')
-  res.locals.filePath = req.body.filePath;
-  next();
+  // res.redirect('/')
+  // res.locals.filePath = req.body.filePath;
+  // next();
 }
 
 composeController.dcup = (req, res, next) => {
-  // { cwd: path }
   // /Users/excursos/Desktop/docker_todo/app-assessment-mod-0/
   // ^^ aka, valid directory with docker-compose file
-  let filePath = res.locals.filePath;
-  console.log(`Input: ${filePath}`);
+
+  let filePath = req.body.filePath;
+  // get req.body!!! sending incorrectly
+  console.log(filePath);
+  // console.log(`Input!!! ${filePath}`);
   exec('docker-compose up -d', { cwd: filePath }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log('Hello!');    
+    console.log('Hello from docker-compose ps!');    
     res.end();
   });
-  next();
+  // next();
 }
 
 composeController.dcps = (req, res, next) => {
@@ -76,7 +75,7 @@ composeController.dcstrt = (req, res, next) => {
 }
 
 composeController.dcstp = (req, res, next) => {
-  exec('docker-compose stop', (err, stout, sterr) => {
+  exec('docker stop $(docker ps -aq)', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
     res.end();
@@ -102,7 +101,6 @@ composeController.psa = (req, res, next) => {
       newline: "",
       skipEmptyLines: true
     });
-    const info = []
     res.send(data.data);
   })
 }
