@@ -10,6 +10,7 @@
   border-style: 1px solid black;
   text-align: center;
   font-size: 1rem;
+  outline: none;
 }
 
 #submit {
