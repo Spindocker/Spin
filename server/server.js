@@ -12,8 +12,9 @@ var Docker = dockerCLI.Docker;
 
 app.use(bodyParser.urlencoded({
   extended: true
-}))
-app.use(bodyParser.json())
+}));
+
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.use(express.static(__dirname + '/../public'));
@@ -24,8 +25,9 @@ app.get('/dcup', composeController.dcup)
 app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
 app.get('/dcstp', composeController.dcstp)
-app.post('/dcfolder', composeController.dcfolder)
 app.get('/dcfile', composeController.dcfile)
+app.get('/dcps', composeController.dcps)
+app.post('/dcfolder', composeController.dcfolder, composeController.dcup, composeController.dcps);
 
 // exec('docker ps -a', (err, stout, sterr) => {
 //   const spaces = stout.replace(/ {2,}/g, '   '  )

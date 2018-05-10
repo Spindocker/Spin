@@ -14,6 +14,7 @@ class App extends Component {
     this.psa = this.psa.bind(this);
     this.dcup = this.dcup.bind(this);
     this.dcdwn = this.dcdwn.bind(this);
+    this.dcps = this.dcps.bind(this);
   }
 
   componentDidMount() {
@@ -50,13 +51,23 @@ class App extends Component {
       },
     })
   }
+
+  dcps() {
+    fetch('/dcps', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+  
   ps() {
     fetch('/docker-ps', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(res => res.json())
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json())
       .then((data) => {
         this.setState({
           containers: data,
@@ -67,11 +78,11 @@ class App extends Component {
 
   psa() {
     fetch('/psa', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(res => res.json())
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json())
       .then((data) => {
         this.setState({
           containers: data,
@@ -83,17 +94,18 @@ class App extends Component {
     return (
       <div>
 
-      <form id="filePathForm" action="/dcfolder" method="POST">
-      <input id="filePathInput" name="filePath" placeholder="file path" type="text" />
-      <button id="submit" type="submit">Submit file path</button>
-    </form>
+        <form id="filePathForm" action="/dcfolder" method="POST">
+          <input id="filePathInput" name="filePath" placeholder="filepath" type="text" />
+          <button id="submit" type="submit">Submit file path</button>
+        </form>
+
         <ComponentsArea comIds={this.showIds()} />
-        <Controls 
-          ps={this.ps} 
-          psa={this.psa} 
-          dcup = {this.dcup} 
-          dcdwn = {this.dcdwn} 
-          /> 
+        <Controls
+          ps={this.ps}
+          psa={this.psa}
+          dcup={this.dcup}
+          dcdwn={this.dcdwn}
+        />
       </div>
     );
   }
