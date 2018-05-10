@@ -12,22 +12,22 @@ var Docker = dockerCLI.Docker;
 
 app.use(bodyParser.urlencoded({
   extended: true
-}))
-app.use(bodyParser.json())
+}));
+
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.use(express.static(__dirname + '/../public'));
 
 app.get('/docker-ps', composeController.ps) // test docker-cli-js
 app.get('/psa', composeController.psa)
-app.get('/dcup', composeController.dcup)
 app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
-
-app.get('/dcstop', composeController.dcstp)
-app.post('/dcfolder', composeController.dcfolder)
-
 app.get('/dcfile', composeController.dcfile)
+app.get('/dcps', composeController.dcps)
+app.get('/dcstop', composeController.dcstp)
+app.post('/dcup', composeController.dcup)
+app.post('/dcfolder', composeController.dcfolder)
 
 app.listen(3333, () => {
   console.log('Listening on Port 3333!')
