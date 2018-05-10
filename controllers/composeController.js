@@ -3,6 +3,8 @@ var DockerOptions = dockerCLI.Options;
 var Docker = dockerCLI.Docker;
 
 const exec = require('child_process').exec
+const execSync = require('child_process').execSync
+const spawn = require('child_process').spawn
 const Papa = require('papaparse')
 const path = require('path');
 
@@ -20,25 +22,42 @@ composeController.ps = (req, res, next) => {
       newline: "",
       skipEmptyLines: true
     });
-    const info = []
-    // console.log(data.data)
     res.send(data.data);
   })
 }
 
-composeController.folder = (req, res, next) => {
+/* middleware chain starts here: */
+composeController.dcfolder = (req, res, next) => {
+  // res.send(req.body.filePath);
   const folder = req.body.folder
-  exec(`cd ${folder}`)
+  // spawn(`cd ${folder}`)
+  res.redirect('/')
+  res.locals.filePath = req.body.filePath;
+  next();
 }
 
 composeController.dcup = (req, res, next) => {
-  exec('docker-compose up', (err, stout, sterr) => {
+  // { cwd: path }
+  // /Users/excursos/Desktop/docker_todo/app-assessment-mod-0/
+  // ^^ aka, valid directory with docker-compose file
+  let filePath = res.locals.filePath;
+  console.log(`Input: ${filePath}`);
+  exec('docker-compose up -d', { cwd: filePath }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
+    console.log('Hello!');    
     res.end();
-    res.end();
-  })
+  });
+  next();
 }
+
+composeController.dcps = (req, res, next) => {
+  // console.log('hello!')
+  exec('docker-compose ps'), (err, stout, sterr) => {
+    console.log(stout);
+  }
+}
+/* middleware chain ends here */
 
 composeController.dcdwn = (req, res, next) => {
   exec('docker-compose down', (err, stout, sterr) => {
@@ -84,7 +103,6 @@ composeController.psa = (req, res, next) => {
       skipEmptyLines: true
     });
     const info = []
-    // console.log(data.data)
     res.send(data.data);
   })
 }

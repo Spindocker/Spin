@@ -10,8 +10,11 @@ class App extends Component {
       containers: [],
     };
     this.showIds = this.showIds.bind(this);
-    this.composeUp = this.composeUp.bind(this);
+    this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
+    this.dcup = this.dcup.bind(this);
+    this.dcdwn = this.dcdwn.bind(this);
+    this.dcps = this.dcps.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +35,33 @@ class App extends Component {
     return this.state.containers.map(container => <p key={container['CONTAINER ID']} className="containers">Container ID: {container['CONTAINER ID']}</p>);
   }
 
-  composeUp() {
+  dcup() {
+    fetch('/dcup', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+  dcdwn() {
+    fetch('/dcdwn', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
+  dcps() {
+    fetch('/dcps', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+  
+  ps() {
     fetch('/docker-ps', {
       method: 'GET',
       headers: {
@@ -40,7 +69,6 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
-        console.log('wtf');
         this.setState({
           containers: data,
         });
@@ -65,8 +93,19 @@ class App extends Component {
   render() {
     return (
       <div>
+
+        <form id="filePathForm" action="/dcfolder" method="POST">
+          <input id="filePathInput" name="filePath" placeholder="filepath" type="text" />
+          <button id="submit" type="submit">Submit file path</button>
+        </form>
+
         <ComponentsArea comIds={this.showIds()} />
-        <Controls composeUp={this.composeUp} psa={this.psa} />
+        <Controls
+          ps={this.ps}
+          psa={this.psa}
+          dcup={this.dcup}
+          dcdwn={this.dcdwn}
+        />
       </div>
     );
   }
