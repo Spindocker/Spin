@@ -1,16 +1,11 @@
 .containers {
-  width: 25%;
-  height: 30%;
+  width: 250px;
+  height: 250px;
   background-color: rgb(159, 203, 249);
-  color: white;
-  font-size: 1.25rem;
-  text-align: center;
-  font-family: system-ui;
   float: right;
   margin: 5px;
   margin-top: 5%;
   display: block;
-  /* clear: both; */
   border-radius: 100%;
 }
 
@@ -19,10 +14,9 @@
 }
 
 #title {
-  /* text-align: center; */
+  font-family: 'Raleway', sans-serif;
   display: inline-block;
   margin-left: 35%;
-  /* margin-right: 50%; */
   position: fixed;
   width: 100%
 }
@@ -31,11 +25,15 @@
   float: right;
   height: 100%;
   width: 85%;
-  display: flex;
+  display: block;
   top: 0;
 }
 
 .containerText {
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  font-family: system-ui;
   position: relative;
   float: left;
   top: 40%;
