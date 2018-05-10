@@ -1,9 +1,16 @@
 .button {
-  width: 200px;
+  width: 95%;
   height: 100px;
   color: white;
-  background-color: red;
+  background-color: rgb(216, 101, 62);
   font-size: 2rem;
   font-family: system-ui;
-  display: flex;
+  margin-left: 3px;
+  display: inline-grid;
+  outline: none;
+}
+
+.button:hover {
+  background-color: rgb(247, 195, 178);
+  color: rgb(130, 118, 114);
 }

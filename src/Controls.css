@@ -1,5 +1,23 @@
 #controlsBar {
   border: 1px solid black;
-  width: 200px;
+  width: 10%;
   height: 100%;
+  position: fixed;
+}
+
+#filePathInput {
+  width: 100%;
+  border-style: 1px solid black;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#submit {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+  background-color: rgb(252, 249, 75);
+  color: rgb(25, 25, 7);
+  font-size: 1.25rem;
+  outline: none;
 }
