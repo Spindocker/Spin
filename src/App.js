@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
-import './ComponentsArea.css';
 
 class App extends Component {
   constructor(props) {
@@ -12,30 +11,18 @@ class App extends Component {
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
-    this.dcup = this.dcup.bind(this);
-    this.dcdwn = this.dcdwn.bind(this);
-  }
 
-  componentDidMount() {
-    fetch('/psa', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.json())
-      .then((data) => {
-        this.setState({
-          containers: data,
-        });
-      });
+    this.up = this.up.bind(this);
+    this.stop = this.stop.bind(this);
   }
 
   showIds(arr) {
-    return this.state.containers.map(container => <p key={container['CONTAINER ID']} className="containers">Container ID: {container['CONTAINER ID']}</p>);
+    return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
   }
 
-  dcup() {
-    fetch('/dcup', {
+  ps() {
+    fetch('/docker-ps', {
+
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -60,8 +47,8 @@ class App extends Component {
       .then((data) => {
         this.setState({
           containers: data,
+          currentViewName: 'Containers online',
         });
-        console.log(this.state.containers);
       });
   }
 
@@ -75,25 +62,40 @@ class App extends Component {
       .then((data) => {
         this.setState({
           containers: data,
+          currentViewName: 'All containers',
         });
       });
+  }
+
+  up() {
+    fetch('/dcup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
+  stop() {
+    fetch('/dcstop', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => {
+      this.setState({
+        containers: [],
+        currentViewName: 'Containers online',
+      });
+    });
   }
 
   render() {
     return (
       <div>
+        <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
+        <Controls ps={this.ps} psa={this.psa} up={this.up} stop={this.stop} />
 
-      <form id="filePathForm" action="/dcfolder" method="POST">
-      <input id="filePathInput" name="filePath" placeholder="file path" type="text" />
-      <button id="submit" type="submit">Submit file path</button>
-    </form>
-        <ComponentsArea comIds={this.showIds()} />
-        <Controls 
-          ps={this.ps} 
-          psa={this.psa} 
-          dcup = {this.dcup} 
-          dcdwn = {this.dcdwn} 
-          /> 
       </div>
     );
   }

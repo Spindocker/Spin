@@ -23,19 +23,11 @@ app.get('/psa', composeController.psa)
 app.get('/dcup', composeController.dcup)
 app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
-app.get('/dcstp', composeController.dcstp)
-app.post('/dcfolder', composeController.dcfolder)
-app.get('/dcfile', composeController.dcfile)
 
-// exec('docker ps -a', (err, stout, sterr) => {
-//   const spaces = stout.replace(/ {2,}/g, '   '  )
-//   var data = Papa.parse(spaces, {
-//     delimiter: "  ",
-//     header: true,
-//     newline: "",
-//     skipEmptyLines: true
-//   });
-// })
+app.get('/dcstop', composeController.dcstp)
+app.post('/dcfolder', composeController.dcfolder)
+
+app.get('/dcfile', composeController.dcfile)
 
 app.listen(3333, () => {
   console.log('Listening on Port 3333!')

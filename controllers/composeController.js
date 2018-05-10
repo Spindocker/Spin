@@ -10,9 +10,6 @@ const path = require('path');
 
 const composeController = {}
 
-// app.use(express.static(__dirname + 'public/'));
-// res.sendFile(path.resolve(__dirname, '../../public/index.html'))
-
 composeController.ps = (req, res, next) => {
   exec('docker ps', (err, stout, sterr) => {
     const spaces = stout.replace(/ {2,}/g, '   ')
@@ -34,6 +31,8 @@ composeController.dcfolder = (req, res, next) => {
 }
 
 composeController.dcup = (req, res, next) => {
+  console.log(req.body.filePath);
+  process.chdir(req.body.filePath);
   exec('docker-compose up', (err, stout, sterr) => {
     console.log(stout)
     console.log()
@@ -61,7 +60,7 @@ composeController.dcstrt = (req, res, next) => {
 }
 
 composeController.dcstp = (req, res, next) => {
-  exec('docker-compose stop', (err, stout, sterr) => {
+  exec('docker stop $(docker ps -aq)', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
     res.end();
@@ -87,7 +86,6 @@ composeController.psa = (req, res, next) => {
       newline: "",
       skipEmptyLines: true
     });
-    const info = []
     res.send(data.data);
   })
 }
