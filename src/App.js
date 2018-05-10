@@ -9,29 +9,31 @@ class App extends Component {
       containers: [],
     };
     this.showIds = this.showIds.bind(this);
-    this.composeUp = this.composeUp.bind(this);
+    this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
+    this.up = this.up.bind(this);
   }
 
-  componentDidMount() {
-    fetch('/psa', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.json())
-      .then((data) => {
-        this.setState({
-          containers: data,
-        });
-      });
-  }
+  // componentDidMount() {
+  //   fetch('/psa', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   }).then(res => res.json())
+  //     .then((data) => {
+  //       this.setState({
+  //         containers: data,
+  //         currentViewName: '',
+  //       });
+  //     });
+  // }
 
   showIds(arr) {
-    return this.state.containers.map(container => <p key={container['CONTAINER ID']} className="containers">Container ID: {container['CONTAINER ID']}</p>);
+    return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
   }
 
-  composeUp() {
+  ps() {
     fetch('/docker-ps', {
       method: 'GET',
       headers: {
@@ -39,11 +41,10 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
-        console.log('wtf');
         this.setState({
           containers: data,
+          currentViewName: 'Containers online',
         });
-        console.log(this.state.containers);
       });
   }
 
@@ -57,15 +58,25 @@ class App extends Component {
       .then((data) => {
         this.setState({
           containers: data,
+          currentViewName: 'All containers',
         });
       });
+  }
+
+  up() {
+    fetch('/dcup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   render() {
     return (
       <div>
-        <ComponentsArea comIds={this.showIds()} />
-        <Controls composeUp={this.composeUp} psa={this.psa} />
+        <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
+        <Controls ps={this.ps} psa={this.psa} up={this.up} />
       </div>
     );
   }

@@ -1,10 +1,12 @@
 import React from 'react';
 import './ComponentsArea.css';
 
-const ComponentsArea = ({ comIds }) => (
+const ComponentsArea = ({ comIds, currentViewName }) => (
   <div>
-    <h1 id="title">Compose GUI</h1>
-    {comIds}
+    <div id="componentView">
+    <h1 id="title">{currentViewName}</h1>
+      {comIds}
+    </div>
   </div>
 );
 

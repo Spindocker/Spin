@@ -32,6 +32,8 @@ composeController.folder = (req, res, next) => {
 }
 
 composeController.dcup = (req, res, next) => {
+  console.log(req.body.filePath);
+  process.chdir(req.body.filePath);
   exec('docker-compose up', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
@@ -84,7 +86,7 @@ composeController.psa = (req, res, next) => {
       skipEmptyLines: true
     });
     const info = []
-    // console.log(data.data)
+    console.log(data.data)
     res.send(data.data);
   })
 }
