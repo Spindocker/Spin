@@ -9,10 +9,10 @@ const Controls = ({ ps, psa, dcup, stop, fp }) => (
       <br />
       <button id="submit" type="submit">Submit file path</button>
     </form>
-    <Button name="ps" click={ps} />
-    <Button name="ps -a" click={psa} />
-    <Button name="dcup" click={dcup} />
-    <Button name="stop" click={stop} />
+    <Button name="Online containers" click={ps} />
+    <Button name="All containers" click={psa} />
+    <Button name="Compose up" click={dcup} />
+    <Button name="Stop containers" click={stop} />
   </div>
 );
 
