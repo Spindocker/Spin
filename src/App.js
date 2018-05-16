@@ -7,7 +7,7 @@ class App extends Component {
     super(props);
     this.state = {
       containers: [],
-      filePath: ''
+      filePath: '',
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
@@ -23,20 +23,9 @@ class App extends Component {
 
   handleFilePath(e) {
     e.preventDefault();
-
     this.setState({
-      filePath: e.target[0].value
-    })
-    console.log(this.state.filePath);
-  }
-
-  ps() {
-    fetch('/docker-ps', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+      filePath: e.target[0].value,
+    });
   }
 
   dcdwn() {
@@ -45,7 +34,7 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
+    });
   }
 
   dcps() {
@@ -54,9 +43,9 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
+    });
   }
-  
+
   ps() {
     fetch('/docker-ps', {
       method: 'GET',
@@ -95,8 +84,8 @@ class App extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        filePath: this.state.filePath
-      })
+        filePath: this.state.filePath,
+      }),
     });
   }
 
@@ -119,11 +108,11 @@ class App extends Component {
       <div>
         <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
         <Controls
-          fp={this.handleFilePath} 
-          ps={this.ps} 
-          psa={this.psa} 
-          dcup={this.dcup} 
-          stop={this.stop} 
+          fp={this.handleFilePath}
+          ps={this.ps}
+          psa={this.psa}
+          dcup={this.dcup}
+          stop={this.stop}
         />
       </div>
     );
