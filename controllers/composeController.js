@@ -11,15 +11,46 @@ const path = require('path');
 const composeController = {}
 
 composeController.ps = (req, res, next) => {
-  exec('docker ps', (err, stout, sterr) => {
+  let filePath = req.body.filepathFetch;
+  let psData;
+  let dcpsData;
+  exec('docker ps', { cwd: filePath }, (err, stout, sterr) => {
     const spaces = stout.replace(/ {2,}/g, '   ')
-    var data = Papa.parse(spaces, {
+    data = Papa.parse(spaces, {
       delimiter: "  ",
       header: true,
       newline: "",
       skipEmptyLines: true
     });
-    res.send(data.data);
+
+    function objLength (obj) {
+      var size = 0, key;
+      for (key in obj) {
+          if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+    }
+
+    psData = data.data
+    for (let i = 0; i < psData.length; i += 1) {
+      const length = objLength(psData[i])
+      if (length < 7) {
+        const names = psData[i][' PORTS'];
+        delete psData[i][' PORTS'];
+        psData[i][' NAME'] = names
+      }
+    }
+
+    // () =>  {
+    //   const final = data.data
+    //   for (let i = 0; i < final.length; i += 1){
+    //     const names = final[i][' PORTS'];
+    //     delete final[i][' PORTS'];
+    //     final[i][' NAME'] = names
+    // }}
+
+    console.log(psData)
+    res.send(psData);
   })
 }
 
@@ -27,10 +58,10 @@ composeController.ps = (req, res, next) => {
 composeController.dcfolder = (req, res, next) => {
   // res.send(req.body.filePath);
   const folder = req.body.folder
-  // spawn(`cd ${folder}`)
-  // res.redirect('/')
-  // res.locals.filePath = req.body.filePath;
-  // next();
+  spawn(`cd ${folder}`)
+  res.redirect('/')
+  res.locals.filePath = req.body.filePath;
+  next();
 }
 
 composeController.dcup = (req, res, next) => {
@@ -44,7 +75,7 @@ composeController.dcup = (req, res, next) => {
   exec('docker-compose up -d', { cwd: filePath }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log('Hello from docker-compose ps!');    
+    console.log('Hello from docker-compose ps!');
     res.end();
   });
   // next();
