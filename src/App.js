@@ -59,10 +59,11 @@ class App extends Component {
   
   ps() {
     fetch('/docker-ps', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({filepathFetch: this.state.filePath}),
     }).then(res => res.json())
       .then((data) => {
         this.setState({
@@ -123,7 +124,8 @@ class App extends Component {
           ps={this.ps} 
           psa={this.psa} 
           dcup={this.dcup} 
-          stop={this.stop} 
+          stop={this.stop}
+          file={this.state.filePath} 
         />
       </div>
     );
