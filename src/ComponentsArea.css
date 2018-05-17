@@ -1,12 +1,11 @@
 .containers {
   width: 250px;
-  height: 250px;
+  height: 180px;
   background-color: rgb(159, 203, 249);
   float: right;
   margin: 5px;
-  margin-top: 5%;
+  margin-top: 2.5%;
   display: block;
-  border-radius: 100%;
 }
 
 .containers:hover {
@@ -17,8 +16,7 @@
   font-family: 'Raleway', sans-serif;
   display: inline-block;
   margin-left: 35%;
-  position: fixed;
-  width: 100%
+  width: 100%;
 }
 
 #componentView {
