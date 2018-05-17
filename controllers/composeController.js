@@ -25,12 +25,7 @@ composeController.ps = (req, res, next) => {
 
 /* middleware chain starts here: */
 composeController.dcfolder = (req, res, next) => {
-  // res.send(req.body.filePath);
   const folder = req.body.folder
-  // spawn(`cd ${folder}`)
-  // res.redirect('/')
-  // res.locals.filePath = req.body.filePath;
-  // next();
 }
 
 composeController.dcup = (req, res, next) => {
@@ -41,10 +36,12 @@ composeController.dcup = (req, res, next) => {
   // get req.body!!! sending incorrectly
   console.log(filePath);
   // console.log(`Input!!! ${filePath}`);
-  exec('docker-compose up -d', { cwd: filePath }, (err, stout, sterr) => {
+  exec('docker-compose up -d', {
+    cwd: filePath
+  }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log('Hello from docker-compose ps!');    
+    console.log('Hello from docker-compose ps!');
     res.end();
   });
   // next();
