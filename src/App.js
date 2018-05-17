@@ -13,6 +13,7 @@ class App extends Component {
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
     this.dcup = this.dcup.bind(this);
+    this.dcdwn = this.dcdwn.bind(this);
     this.stop = this.stop.bind(this);
     this.handleFilePath = this.handleFilePath.bind(this);
   }
@@ -77,7 +78,6 @@ class App extends Component {
   }
 
   dcup() {
-    // let obj = {filePath: this.state.filePath}
     fetch('/dcup', {
       headers: {
         'Content-Type': 'application/json',
