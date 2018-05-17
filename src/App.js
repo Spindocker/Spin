@@ -11,6 +11,7 @@ class App extends Component {
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
+    this.dcps = this.dcps.bind(this);
     this.psa = this.psa.bind(this);
     this.dcup = this.dcup.bind(this);
     this.stop = this.stop.bind(this);
@@ -49,16 +50,7 @@ class App extends Component {
   }
 
   dcps() {
-    fetch('/dcps', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }
-  
-  ps() {
-    fetch('/docker-ps', {
+    fetch('/docker-composeps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -122,6 +114,7 @@ class App extends Component {
         <Controls
           fp={this.handleFilePath} 
           ps={this.ps} 
+          dcps={this.dcps}
           psa={this.psa} 
           dcup={this.dcup} 
           stop={this.stop}

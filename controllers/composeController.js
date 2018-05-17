@@ -11,10 +11,7 @@ const path = require('path');
 const composeController = {}
 
 composeController.ps = (req, res, next) => {
-  let filePath = req.body.filepathFetch;
-  let psData;
-  let dcpsData;
-  exec('docker ps', { cwd: filePath }, (err, stout, sterr) => {
+  exec('docker ps', (err, stout, sterr) => {
     const spaces = stout.replace(/ {2,}/g, '   ')
     data = Papa.parse(spaces, {
       delimiter: "  ",
@@ -23,10 +20,10 @@ composeController.ps = (req, res, next) => {
       skipEmptyLines: true
     });
 
-    function objLength (obj) {
+    function objLength(obj) {
       var size = 0, key;
       for (key in obj) {
-          if (obj.hasOwnProperty(key)) size++;
+        if (obj.hasOwnProperty(key)) size++;
       }
       return size;
     }
@@ -41,15 +38,6 @@ composeController.ps = (req, res, next) => {
       }
     }
 
-    // () =>  {
-    //   const final = data.data
-    //   for (let i = 0; i < final.length; i += 1){
-    //     const names = final[i][' PORTS'];
-    //     delete final[i][' PORTS'];
-    //     final[i][' NAME'] = names
-    // }}
-
-    console.log(psData)
     res.send(psData);
   })
 }
@@ -82,10 +70,48 @@ composeController.dcup = (req, res, next) => {
 }
 
 composeController.dcps = (req, res, next) => {
-  // console.log('hello!')
-  exec('docker-compose ps'), (err, stout, sterr) => {
-    console.log(stout);
-  }
+  let filePath = req.body.filepathFetch;
+  let psData;
+  let dcpsData;
+  exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
+    const spaces = stout.replace(/ {2,}/g, '   ')
+    data = Papa.parse(spaces, {
+      delimiter: "  ",
+      // header: true,
+      newline: "",
+      skipEmptyLines: true
+    });
+
+    function objLength(obj) {
+      let size = 0;
+      let key;
+      for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+    }
+
+    psData = data.data
+    for (let i = 0; i < psData.length; i += 1) {
+      const length = objLength(psData[i])
+      if (length < 7) {
+        const names = psData[i][' PORTS'];
+        delete psData[i][' PORTS'];
+        psData[i][' NAME'] = names
+      }
+    }
+
+    // () =>  {
+    //   const final = data.data
+    //   for (let i = 0; i < final.length; i += 1){
+    //     const names = final[i][' PORTS'];
+    //     delete final[i][' PORTS'];
+    //     final[i][' NAME'] = names
+    // }}
+
+    console.log(psData)
+    res.send(psData);
+  })
 }
 /* middleware chain ends here */
 

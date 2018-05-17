@@ -19,7 +19,8 @@ app.use(express.static('public'));
 
 app.use(express.static(__dirname + '/../public'));
 
-app.post('/docker-ps', composeController.ps) // test docker-cli-js
+app.get('/docker-ps', composeController.ps) // test docker-cli-js
+app.post('/docker-composeps', composeController.dcps)
 app.get('/psa', composeController.psa)
 app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
