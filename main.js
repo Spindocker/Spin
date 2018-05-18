@@ -1,7 +1,10 @@
 const electron = require('electron');
 
-const { app, BrowserWindow } = electron;
-
+const {
+  app, BrowserWindow, dialog, ipcMain,
+} = electron;
+const port = 3333;
+process.env.ELECTRON_START_URL = `http://localhost:${port}`;
 const path = require('path');
 const url = require('url');
 
@@ -9,9 +12,9 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 1600, height: 1200 });
-  mainWindow.loadURL('http://localhost:3333/' || process.env.ELECTRON_START_URL ||
+  mainWindow.loadURL(process.env.ELECTRON_START_URL ||
     url.format({
-      pathname: path.join(__dirname, '/../build/index.html'),
+      pathname: path.join(__dirname, './public/index.html'),
       protocol: 'file:',
       slashes: true,
     }));
@@ -32,4 +35,11 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on('item:add', (e) => {
+  const filePath = dialog.showOpenDialog({
+    properties: ['openDirectory'],
+  })[0];
+  mainWindow.webContents.send('item:add', filePath);
 });

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
 
+const { ipcRenderer } = window.require('electron');
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +18,16 @@ class App extends Component {
     this.dcdwn = this.dcdwn.bind(this);
     this.stop = this.stop.bind(this);
     this.handleFilePath = this.handleFilePath.bind(this);
+    this.open = this.open.bind(this);
   }
 
+  componentDidMount() {
+    ipcRenderer.on('item:add', (e, item) => {
+      this.setState({
+        filePath: item,
+      });
+    });
+  }
   showIds(arr) {
     return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
   }
@@ -106,6 +116,12 @@ class App extends Component {
     });
   }
 
+  open(e) {
+    e.preventDefault();
+    ipcRenderer.send('item:add');
+  }
+
+
   render() {
     return (
       <div>
@@ -117,6 +133,7 @@ class App extends Component {
           dcup={this.dcup}
           dcdwn={this.dcdwn}
           stop={this.stop}
+          open={this.open}
         />
       </div>
     );
