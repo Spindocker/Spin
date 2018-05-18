@@ -4,7 +4,7 @@ import './Controls.css';
 
 const Controls = ({ ps, psa, dcup, stop, fp, open, dcdwn }) => (
   <div id="controlsBar">
-    <button id="party" className="very-sweet-looking" onClick={open} >Open</button>
+    <button id="openFolder" className="very-sweet-looking" onClick={open} >Browse</button>
     <Button name="Online containers" click={ps} />
     <Button name="All containers" click={psa} />
     <Button name="Compose up" click={dcup} />
