@@ -70,47 +70,37 @@ composeController.dcup = (req, res, next) => {
 }
 
 composeController.dcps = (req, res, next) => {
-  let filePath = req.body.filepathFetch;
-  let psData;
-  let dcpsData;
-  exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
-    const spaces = stout.replace(/ {2,}/g, '   ')
-    data = Papa.parse(spaces, {
-      delimiter: "  ",
-      // header: true,
-      newline: "",
-      skipEmptyLines: true
-    });
-
-    function objLength(obj) {
-      let size = 0;
-      let key;
-      for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-      }
-      return size;
-    }
-
-    psData = data.data
-    for (let i = 0; i < psData.length; i += 1) {
-      const length = objLength(psData[i])
-      if (length < 7) {
-        const names = psData[i][' PORTS'];
-        delete psData[i][' PORTS'];
-        psData[i][' NAME'] = names
+  let filePath = '/Users/RAW/Github/dockerComposeTutorial';
+let filtering = []
+let final = [];
+exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
+  const spaces = stout.replace(/ {2,}/g, '  ')
+  data = Papa.parse(stout, {
+    header: false,
+    trimHeader: false,
+    delimiter: '   ',
+    skipEmptyLines: true
+  });
+  // filtering = data.data
+  data.data.reduce((acc, cur) => {
+    const temp = []
+    for (let i = 0; i < cur.length; i += 1) {
+      if (cur[i]) {
+        const trimmed = cur[i].trim()
+        temp.push(trimmed)
       }
     }
-
-    // () =>  {
-    //   const final = data.data
-    //   for (let i = 0; i < final.length; i += 1){
-    //     const names = final[i][' PORTS'];
-    //     delete final[i][' PORTS'];
-    //     final[i][' NAME'] = names
-    // }}
-
-    console.log(psData)
-    res.send(psData);
+    filtering.push(temp)
+  }, [])
+  for (let i = 2; i < filtering.length; i += 1) {
+    const interim = {};
+    for (let k = 0; k < 4; k += 1) {
+      interim[filtering[0][k]] = filtering[i][k]
+    }
+    final.push(interim);
+  }
+  console.log(final)
+  res.send(final);
   })
 }
 /* middleware chain ends here */
@@ -163,3 +153,7 @@ composeController.psa = (req, res, next) => {
 }
 
 module.exports = composeController;
+
+
+
+

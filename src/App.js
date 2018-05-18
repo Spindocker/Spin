@@ -7,7 +7,7 @@ class App extends Component {
     super(props);
     this.state = {
       containers: [],
-      filePath: ''
+      filePath: '',
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
@@ -24,20 +24,9 @@ class App extends Component {
 
   handleFilePath(e) {
     e.preventDefault();
-
     this.setState({
-      filePath: e.target[0].value
-    })
-    console.log(this.state.filePath);
-  }
-
-  ps() {
-    fetch('/docker-ps', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+      filePath: e.target[0].value,
+    });
   }
 
   dcdwn() {
@@ -46,7 +35,7 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
+    });
   }
 
   dcps() {
@@ -56,6 +45,21 @@ class App extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({filepathFetch: this.state.filePath}),
+    }).then(res => res.json())
+      .then((data) => {
+        this.setState({
+          containers: data,
+          currentViewName: 'Containers online',
+        });
+      });
+  }
+
+  ps() {
+    fetch('/docker-ps', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }).then(res => res.json())
       .then((data) => {
         this.setState({
@@ -88,8 +92,8 @@ class App extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        filePath: this.state.filePath
-      })
+        filePath: this.state.filePath,
+      }),
     });
   }
 
