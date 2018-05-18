@@ -87,6 +87,8 @@ class App extends Component {
       body: JSON.stringify({
         filePath: this.state.filePath,
       }),
+    }).then(() => {
+      this.ps();
     });
   }
 
@@ -125,7 +127,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
+        <ComponentsArea
+          comIds={this.showIds()}
+          currentViewName={this.state.currentViewName}
+          filePath={this.state.filePath}
+        />
         <Controls
           fp={this.handleFilePath}
           ps={this.ps}

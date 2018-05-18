@@ -13,3 +13,13 @@
   background-color: rgb(209, 215, 226);
   color: rgb(130, 118, 114);
 }
+
+#openFolder {
+  background-color: rgb(244, 131, 66);
+  width: 100%;
+  font-size: 1.25rem;
+  height: 50px;
+  color: white;
+  font-family: system-ui;
+  outline: none;
+}
