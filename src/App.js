@@ -135,15 +135,7 @@ class App extends Component {
       <div>
         <ComponentsArea comIds={this.showIds()} currentViewName={this.state.currentViewName} />
         <Controls
-<<<<<<< HEAD
-          fp={this.handleFilePath} 
-          ps={this.ps} 
           dcps={this.dcps}
-          psa={this.psa} 
-          dcup={this.dcup} 
-          stop={this.stop}
-          file={this.state.filePath} 
-=======
           fp={this.handleFilePath}
           ps={this.ps}
           psa={this.psa}
@@ -151,7 +143,7 @@ class App extends Component {
           dcdwn={this.dcdwn}
           stop={this.stop}
           open={this.open}
->>>>>>> c1eaf1a8b455c56dadd60c0e0a323eff4e5356d7
+          file={this.state.filePath} 
         />
       </div>
     );
