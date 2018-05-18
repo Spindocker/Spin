@@ -26,7 +26,7 @@ app.get('/dcfile', composeController.dcfile)
 app.get('/dcps', composeController.dcps)
 app.get('/dcstop', composeController.dcstp)
 app.post('/dcup', composeController.dcup)
-app.get('/dcdwn', composeController.dcdwn)
+app.post('/dcdwn', composeController.dcdwn)
 app.post('/dcfolder', composeController.dcfolder)
 
 app.listen(3333, () => {
