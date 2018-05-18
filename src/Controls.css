@@ -1,6 +1,6 @@
 #controlsBar {
   border: 1px solid black;
-  width: 10%;
+  width: 15%;
   height: 100%;
   position: fixed;
 }
@@ -17,8 +17,12 @@
   width: 100%;
   text-align: center;
   padding: 30px;
-  background-color: rgb(252, 249, 75);
-  color: rgb(25, 25, 7);
+  background-color: #090C9B;
+  color: white;
   font-size: 1.25rem;
   outline: none;
+}
+
+#business {
+  display: none;
 }

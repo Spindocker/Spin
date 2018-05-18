@@ -44,7 +44,6 @@ composeController.ps = (req, res, next) => {
 
 /* middleware chain starts here: */
 composeController.dcfolder = (req, res, next) => {
-  // res.send(req.body.filePath);
   const folder = req.body.folder
   spawn(`cd ${folder}`)
   res.redirect('/')
@@ -53,20 +52,28 @@ composeController.dcfolder = (req, res, next) => {
 }
 
 composeController.dcup = (req, res, next) => {
-  // /Users/excursos/Desktop/docker_todo/app-assessment-mod-0/
-  // ^^ aka, valid directory with docker-compose file
-
   let filePath = req.body.filePath;
-  // get req.body!!! sending incorrectly
   console.log(filePath);
-  // console.log(`Input!!! ${filePath}`);
-  exec('docker-compose up -d', { cwd: filePath }, (err, stout, sterr) => {
+  exec('docker-compose up -d', {
+    cwd: filePath
+  }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
     console.log('Hello from docker-compose ps!');
     res.end();
   });
-  // next();
+}
+
+composeController.dcdwn = (req, res, next) => {
+  let filePath = req.body.filePath;
+  console.log(filePath);
+  exec('docker-compose down', {
+    cwd: filePath
+  }, (err, stout, sterr) => {
+    if (err) console.log(err);
+    if (sterr) console.log(sterr);
+    res.end();
+  });
 }
 
 composeController.dcps = (req, res, next) => {
@@ -103,15 +110,7 @@ exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
   res.send(final);
   })
 }
-/* middleware chain ends here */
 
-composeController.dcdwn = (req, res, next) => {
-  exec('docker-compose down', (err, stout, sterr) => {
-    if (err) console.log(err);
-    if (sterr) console.log(sterr);
-    res.end();
-  })
-}
 
 composeController.dcstrt = (req, res, next) => {
   exec('docker-compose start', (err, stout, sterr) => {
@@ -137,7 +136,6 @@ composeController.dcfile = (req, res, next) => {
     res.end();
   })
 }
-
 
 composeController.psa = (req, res, next) => {
   exec('docker ps -a', (err, stout, sterr) => {
