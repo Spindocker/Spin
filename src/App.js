@@ -29,15 +29,6 @@ class App extends Component {
     });
   }
 
-  dcdwn() {
-    fetch('/dcdwn', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
-
   dcps() {
     fetch('/dcps', {
       method: 'GET',
@@ -89,6 +80,18 @@ class App extends Component {
     });
   }
 
+  dcdwn() {
+    fetch('/dcdwn', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        filePath: this.state.filePath,
+      }),
+    });
+  }
+
   stop() {
     fetch('/dcstop', {
       method: 'GET',
@@ -112,6 +115,7 @@ class App extends Component {
           ps={this.ps}
           psa={this.psa}
           dcup={this.dcup}
+          dcdwn={this.dcdwn}
           stop={this.stop}
         />
       </div>
