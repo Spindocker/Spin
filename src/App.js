@@ -13,6 +13,7 @@ class App extends Component {
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
+    this.dcps = this.dcps.bind(this);
     this.psa = this.psa.bind(this);
     this.dcup = this.dcup.bind(this);
     this.dcdwn = this.dcdwn.bind(this);
@@ -40,12 +41,19 @@ class App extends Component {
   }
 
   dcps() {
-    fetch('/dcps', {
-      method: 'GET',
+    fetch('/docker-composeps', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+      body: JSON.stringify({filepathFetch: this.state.filePath}),
+    }).then(res => res.json())
+      .then((data) => {
+        this.setState({
+          containers: data,
+          currentViewName: 'Containers online',
+        });
+      });
   }
 
   ps() {
@@ -133,6 +141,7 @@ class App extends Component {
           filePath={this.state.filePath}
         />
         <Controls
+          dcps={this.dcps}
           fp={this.handleFilePath}
           ps={this.ps}
           psa={this.psa}
@@ -140,6 +149,7 @@ class App extends Component {
           dcdwn={this.dcdwn}
           stop={this.stop}
           open={this.open}
+          file={this.state.filePath} 
         />
       </div>
     );
