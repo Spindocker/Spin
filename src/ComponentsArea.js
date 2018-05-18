@@ -4,7 +4,7 @@ import './ComponentsArea.css';
 const ComponentsArea = ({ comIds, currentViewName }) => (
   <div>
     <div id="componentView">
-    <h1 id="title">{currentViewName}</h1>
+      <h1 id="title">{currentViewName}</h1>
       {comIds}
     </div>
   </div>
