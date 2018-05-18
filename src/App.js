@@ -15,6 +15,7 @@ class App extends Component {
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
     this.dcup = this.dcup.bind(this);
+    this.dcdwn = this.dcdwn.bind(this);
     this.stop = this.stop.bind(this);
     this.handleFilePath = this.handleFilePath.bind(this);
     this.open = this.open.bind(this);
@@ -35,15 +36,6 @@ class App extends Component {
     e.preventDefault();
     this.setState({
       filePath: e.target[0].value,
-    });
-  }
-
-  dcdwn() {
-    fetch('/dcdwn', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
   }
 
@@ -98,6 +90,18 @@ class App extends Component {
     });
   }
 
+  dcdwn() {
+    fetch('/dcdwn', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        filePath: this.state.filePath,
+      }),
+    });
+  }
+
   stop() {
     fetch('/dcstop', {
       method: 'GET',
@@ -127,6 +131,7 @@ class App extends Component {
           ps={this.ps}
           psa={this.psa}
           dcup={this.dcup}
+          dcdwn={this.dcdwn}
           stop={this.stop}
           open={this.open}
         />
