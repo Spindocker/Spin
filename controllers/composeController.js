@@ -13,24 +13,46 @@ const composeController = {}
 composeController.ps = (req, res, next) => {
   exec('docker ps', (err, stout, sterr) => {
     const spaces = stout.replace(/ {2,}/g, '   ')
-    var data = Papa.parse(spaces, {
+    data = Papa.parse(spaces, {
       delimiter: "  ",
       header: true,
       newline: "",
       skipEmptyLines: true
     });
-    res.send(data.data);
+
+    function objLength(obj) {
+      var size = 0, key;
+      for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+    }
+
+    psData = data.data
+    for (let i = 0; i < psData.length; i += 1) {
+      const length = objLength(psData[i])
+      if (length < 7) {
+        const names = psData[i][' PORTS'];
+        delete psData[i][' PORTS'];
+        psData[i][' NAME'] = names
+      }
+    }
+
+    res.send(psData);
   })
 }
 
 /* middleware chain starts here: */
 composeController.dcfolder = (req, res, next) => {
   const folder = req.body.folder
+  spawn(`cd ${folder}`)
+  res.redirect('/')
+  res.locals.filePath = req.body.filePath;
+  next();
 }
 
 composeController.dcup = (req, res, next) => {
   let filePath = req.body.filePath;
-  console.log(filePath);
   exec('docker-compose up -d', {
     cwd: filePath
   }, (err, stout, sterr) => {
@@ -43,7 +65,6 @@ composeController.dcup = (req, res, next) => {
 
 composeController.dcdwn = (req, res, next) => {
   let filePath = req.body.filePath;
-  console.log(filePath);
   exec('docker-compose down', {
     cwd: filePath
   }, (err, stout, sterr) => {
@@ -54,9 +75,37 @@ composeController.dcdwn = (req, res, next) => {
 }
 
 composeController.dcps = (req, res, next) => {
-  exec('docker-compose ps'), (err, stout, sterr) => {
-    console.log(stout);
+  let filePath = '/Users/RAW/Github/dockerComposeTutorial';
+let filtering = []
+let final = [];
+exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
+  const spaces = stout.replace(/ {2,}/g, '  ')
+  data = Papa.parse(stout, {
+    header: false,
+    trimHeader: false,
+    delimiter: '   ',
+    skipEmptyLines: true
+  });
+  // filtering = data.data
+  data.data.reduce((acc, cur) => {
+    const temp = []
+    for (let i = 0; i < cur.length; i += 1) {
+      if (cur[i]) {
+        const trimmed = cur[i].trim()
+        temp.push(trimmed)
+      }
+    }
+    filtering.push(temp)
+  }, [])
+  for (let i = 2; i < filtering.length; i += 1) {
+    const interim = {};
+    for (let k = 0; k < 4; k += 1) {
+      interim[filtering[0][k]] = filtering[i][k]
+    }
+    final.push(interim);
   }
+  res.send(final);
+  })
 }
 
 
@@ -99,3 +148,7 @@ composeController.psa = (req, res, next) => {
 }
 
 module.exports = composeController;
+
+
+
+
