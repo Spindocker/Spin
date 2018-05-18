@@ -21,12 +21,12 @@ app.use(express.static(__dirname + '/../public'));
 
 app.get('/docker-ps', composeController.ps) // test docker-cli-js
 app.get('/psa', composeController.psa)
-app.get('/dcdwn', composeController.dcdwn)
 app.get('/dcstrt', composeController.dcstrt)
 app.get('/dcfile', composeController.dcfile)
 app.get('/dcps', composeController.dcps)
 app.get('/dcstop', composeController.dcstp)
 app.post('/dcup', composeController.dcup)
+app.get('/dcdwn', composeController.dcdwn)
 app.post('/dcfolder', composeController.dcfolder)
 
 app.listen(3333, () => {

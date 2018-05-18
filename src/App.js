@@ -31,10 +31,13 @@ class App extends Component {
 
   dcdwn() {
     fetch('/dcdwn', {
-      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+      method: 'POST',
+      body: JSON.stringify({
+        filePath: this.state.filePath,
+      }),
     });
   }
 
@@ -112,6 +115,7 @@ class App extends Component {
           ps={this.ps}
           psa={this.psa}
           dcup={this.dcup}
+          dcdwn={this.dcdwn}
           stop={this.stop}
         />
       </div>

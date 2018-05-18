@@ -44,7 +44,6 @@ composeController.dcup = (req, res, next) => {
     console.log('Hello from docker-compose ps!');
     res.end();
   });
-  // next();
 }
 
 composeController.dcps = (req, res, next) => {
@@ -56,11 +55,21 @@ composeController.dcps = (req, res, next) => {
 /* middleware chain ends here */
 
 composeController.dcdwn = (req, res, next) => {
-  exec('docker-compose down', (err, stout, sterr) => {
+  // /Users/excursos/Desktop/docker_todo/app-assessment-mod-0/
+  // ^^ aka, valid directory with docker-compose file
+
+  let filePath = req.body.filePath;
+  // get req.body!!! sending incorrectly
+  console.log(filePath);
+  // console.log(`Input!!! ${filePath}`);
+  exec('docker-compose down', {
+    cwd: filePath
+  }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
+    console.log('Hello from docker-compose ps!');
     res.end();
-  })
+  });
 }
 
 composeController.dcstrt = (req, res, next) => {
