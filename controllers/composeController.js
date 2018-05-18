@@ -53,7 +53,6 @@ composeController.dcfolder = (req, res, next) => {
 
 composeController.dcup = (req, res, next) => {
   let filePath = req.body.filePath;
-  console.log(filePath);
   exec('docker-compose up -d', {
     cwd: filePath
   }, (err, stout, sterr) => {
@@ -66,7 +65,6 @@ composeController.dcup = (req, res, next) => {
 
 composeController.dcdwn = (req, res, next) => {
   let filePath = req.body.filePath;
-  console.log(filePath);
   exec('docker-compose down', {
     cwd: filePath
   }, (err, stout, sterr) => {
@@ -106,7 +104,6 @@ exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
     }
     final.push(interim);
   }
-  console.log(final)
   res.send(final);
   })
 }
