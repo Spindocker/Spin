@@ -1,31 +1,22 @@
 .button {
-  width: 100%;
+  width: 85%;
   height: 50px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.76);
   background-color: #333645;
   font-size: 13px;
-  font-family: roboto, sans-serif;
+  font-weight: 200;
+  font-family: 'Roboto', sans-serif;
   display: inline-grid;
   outline: none;
   text-align: left;
-}
-
-.a {
-  width: 100%;
-  height: 50px;
-  color : rgba(255, 255, 255, 0.85);
-  background-color: #333645;
-  font-size: 13px;
-  font-family: roboto, sans-serif;
-  display: inline-grid;
-  outline: none;
-  text-align: left;
-  padding-left: 15px;
+  padding-left: 15%;
+  padding-top: 10%;
 }
 
 .button:hover {
   background-color: rgba(209, 215, 226, 0.575);
   color: rgb(130, 118, 114);
+  transition: .5s;
 }
 
 #openFolder {
@@ -34,6 +25,6 @@
   font-size: 1.25rem;
   height: 50px;
   color: white;
-  font-family: roboto, sans-serif;
+  font-family: 'Roboto', sans-serif;
   outline: none;
 }
