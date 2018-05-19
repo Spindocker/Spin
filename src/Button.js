@@ -7,5 +7,4 @@ const Button = ({ name, click}) => (
   </div>
 );
 
-
 export default Button;
