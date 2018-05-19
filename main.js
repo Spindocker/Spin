@@ -45,6 +45,7 @@ app.on('activate', () => {
 ipcMain.on('item:add', (e) => {
   const filePath = dialog.showOpenDialog({
     properties: ['openDirectory'],
-  })[0];
-  mainWindow.webContents.send('item:add', filePath);
+  });
+  e.returnValue = false;
+  if (filePath !== undefined) mainWindow.webContents.send('item:add', filePath[0]);
 });
