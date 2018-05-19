@@ -12,6 +12,8 @@
   padding-left: 15%;
   border-style: none;
   padding-top: 10%;
+  padding-bottom: 1%;
+  padding: 10px 0 10px 40px;
 }
 
 .button:hover {
