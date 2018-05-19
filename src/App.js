@@ -149,7 +149,7 @@ class App extends Component {
           dcdwn={this.dcdwn}
           stop={this.stop}
           open={this.open}
-          file={this.state.filePath} 
+          file={this.state.filePath}
         />
       </div>
     );

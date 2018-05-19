@@ -1,5 +1,5 @@
 {
-  "name": "gui-app2",
+  "name": "spindocker",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -9,7 +9,7 @@
     "webpack": "webpack --watch",
     "electron": "electron ."
   },
-  "author": "",
+  "author": "Haaris-S, jmangz, RichWalker3, pkassar",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
