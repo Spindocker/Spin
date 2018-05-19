@@ -6,9 +6,6 @@
   margin: 5px;
   margin-top: 2.5%;
   display: block;
-  -webkit-box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
-  -moz-box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
-  box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
 }
 
 .containers:hover {
@@ -16,7 +13,7 @@
 }
 
 #title {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
   display: block;
   margin-left: 35%;
   /* width: 100%; */
@@ -26,7 +23,7 @@
   background-color: white;
   float: right;
   height: 100%;
-  width: 80%;
+  width: 85%;
   display: block;
   top: 0;
 }
@@ -35,7 +32,7 @@
   color: white;
   font-size: 1rem;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: system-ui;
   position: relative;
   float: left;
   top: 40%;
@@ -48,7 +45,7 @@
 }
 
 #filePathDisplay {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
   display: block;
   font-size: 1.25rem;
   width: 100%;
