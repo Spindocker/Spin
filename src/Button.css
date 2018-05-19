@@ -14,6 +14,7 @@
   padding-top: 10%;
   padding-bottom: 1%;
   padding: 10px 0 10px 40px;
+  transition: .5s;
 }
 
 .button:hover {
@@ -30,4 +31,12 @@
   color: white;
   font-family: 'Roboto', sans-serif;
   outline: none;
+  border-style: none;
+  transition: .5s;
+}
+
+#openFolder:hover {
+  cursor: pointer;
+  background-color: rgb(242, 180, 113);
+  transition: .5s;
 }
