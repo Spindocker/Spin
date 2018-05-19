@@ -10,10 +10,12 @@
   -webkit-box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
   -moz-box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
   box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
+  transition: .5s;
 }
 
 .containers:hover {
-  background-color: #B4C5E4;
+  background-color: rgb(107, 135, 206);
+  transition: .5s;
 }
 
 #title {
