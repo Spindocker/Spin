@@ -1,16 +1,30 @@
 .button {
   width: 100%;
-  height: 100px;
-  color: white;
-  background-color: #B4C5E4;
-  font-size: 1.4rem;
-  font-family: system-ui;
+  height: 50px;
+  color: rgba(255, 255, 255, 0.85);
+  background-color: #333645;
+  font-size: 13px;
+  font-family: roboto, sans-serif;
   display: inline-grid;
   outline: none;
+  text-align: left;
+}
+
+.a {
+  width: 100%;
+  height: 50px;
+  color : rgba(255, 255, 255, 0.85);
+  background-color: #333645;
+  font-size: 13px;
+  font-family: roboto, sans-serif;
+  display: inline-grid;
+  outline: none;
+  text-align: left;
+  padding-left: 15px;
 }
 
 .button:hover {
-  background-color: rgb(209, 215, 226);
+  background-color: rgba(209, 215, 226, 0.575);
   color: rgb(130, 118, 114);
 }
 
@@ -20,6 +34,6 @@
   font-size: 1.25rem;
   height: 50px;
   color: white;
-  font-family: system-ui;
+  font-family: roboto, sans-serif;
   outline: none;
 }

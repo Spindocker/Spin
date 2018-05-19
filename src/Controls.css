@@ -3,6 +3,7 @@
   width: 15%;
   height: 100%;
   position: fixed;
+  background-color: #333645;
 }
 
 #filePathInput {
