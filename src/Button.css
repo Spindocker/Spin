@@ -10,17 +10,16 @@
   outline: none;
   text-align: left;
   padding-left: 15%;
-  border-style: none;
+  border: 0;
   padding-top: 10%;
   padding-bottom: 1%;
   padding: 10px 0 10px 40px;
   transition: .5s;
+  cursor: pointer;
 }
 
 .button:hover {
   background-color: #1a1c24;
-  transition: .5s;
-  cursor: pointer;
 }
 
 #openFolder {
