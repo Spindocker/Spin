@@ -170,6 +170,7 @@ class App extends Component {
       this.setState({
         containers: [],
         currentViewName: 'Containers online',
+        directories: [],
       });
     });
   }
