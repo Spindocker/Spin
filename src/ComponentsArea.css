@@ -22,7 +22,6 @@
   font-family: 'Roboto', sans-serif;
   display: block;
   margin-left: 35%;
-  /* width: 100%; */
 }
 
 #componentView {
@@ -53,7 +52,7 @@
 #filePathDisplay {
   font-family: 'Roboto', sans-serif;
   display: block;
-  font-size: 1.25rem;
+  font-size: .8rem;
   width: 100%;
   margin-left: 10px;
 }
