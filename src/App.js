@@ -63,7 +63,6 @@ class App extends Component {
     this.setState({
       filePath,
     });
-    console.log(filePath);
   }
 
   clearHistory() {
@@ -179,7 +178,6 @@ class App extends Component {
     e.preventDefault();
     ipcRenderer.send('item:add');
   }
-
 
   render() {
     return (
