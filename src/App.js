@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import keyIndex from 'react-key-index';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
 
 const { ipcRenderer } = window.require('electron');
+const storage = window.require('electron-json-storage');
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class App extends Component {
     this.state = {
       containers: [],
       filePath: '',
+      directories: [],
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
@@ -20,15 +23,58 @@ class App extends Component {
     this.stop = this.stop.bind(this);
     this.handleFilePath = this.handleFilePath.bind(this);
     this.open = this.open.bind(this);
+    this.getDirectories = this.getDirectories.bind(this);
+    this.clearHistory = this.clearHistory.bind(this);
+    this.setFilePath = this.setFilePath.bind(this);
   }
 
   componentDidMount() {
     ipcRenderer.on('item:add', (e, item) => {
+      let size = 0;
+      storage.getAll((err, data) => {
+        if (err) throw err;
+        size = Object.values(data).length;
+        storage.set(String(size), { path: item }, (error) => {
+          if (error) throw error;
+        });
+      });
+
       this.setState({
         filePath: item,
       });
     });
   }
+
+  getDirectories() {
+    storage.getAll((error, data) => {
+      if (error) throw error;
+      const arr = Object.values(data);
+      const directories = arr.map((path, i) => <li key={i} className="directoryItem" onClick={this.setFilePath}>{path.path}</li>);
+      this.setState({
+        containers: [],
+        currentViewName: 'Saved directories',
+        directories,
+      });
+    });
+  }
+
+  setFilePath(e) {
+    const filePath = e.target.innerHTML;
+    this.setState({
+      filePath,
+    });
+    console.log(filePath);
+  }
+
+  clearHistory() {
+    storage.clear((err) => {
+      if (err) throw err;
+    });
+    this.setState({
+      directories: [],
+    });
+  }
+
   showIds(arr) {
     return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
   }
@@ -67,6 +113,7 @@ class App extends Component {
         this.setState({
           containers: data,
           currentViewName: 'Containers online',
+          directories: [],
         });
       });
   }
@@ -82,6 +129,7 @@ class App extends Component {
         this.setState({
           containers: data,
           currentViewName: 'All containers',
+          directories: [],
         });
       });
   }
@@ -139,6 +187,8 @@ class App extends Component {
           comIds={this.showIds()}
           currentViewName={this.state.currentViewName}
           filePath={this.state.filePath}
+          clear={this.clearHistory}
+          directories={this.state.directories}
         />
         <Controls
           dcps={this.dcps}
@@ -150,6 +200,7 @@ class App extends Component {
           stop={this.stop}
           open={this.open}
           file={this.state.filePath}
+          directories={this.getDirectories}
         />
       </div>
     );

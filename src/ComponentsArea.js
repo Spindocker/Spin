@@ -11,7 +11,7 @@ const ComponentsArea = ({ comIds, currentViewName, filePath, clear, directories 
         <h1 id="title">{currentViewName}</h1>
       </div>
       {comIds}
-      <ul>{directories}</ul>
+      <ul id="directoryList">{directories}</ul>
     </div>
   </div>
 );
