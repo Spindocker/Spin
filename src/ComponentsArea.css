@@ -66,6 +66,7 @@
   margin: 20px;
   padding: 10px;
   transition: .5s;
+  cursor: pointer;
 }
 
 .directoryItem:hover {
