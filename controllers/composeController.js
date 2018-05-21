@@ -58,7 +58,8 @@ composeController.dcup = (req, res, next) => {
   }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    console.log('Hello from docker-compose ps!');
+    // res.send(sterr); // Log console messages?
+    // console.log('Hello from docker-compose ps!');
     res.end();
   });
 }
@@ -75,7 +76,7 @@ composeController.dcdwn = (req, res, next) => {
 }
 
 composeController.dcps = (req, res, next) => {
-  let filePath = '/Users/RAW/Github/dockerComposeTutorial';
+  let filePath = req.body.filePath;
 let filtering = []
 let final = [];
 exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
