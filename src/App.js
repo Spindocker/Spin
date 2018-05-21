@@ -34,16 +34,25 @@ class App extends Component {
       storage.getAll((err, data) => {
         if (err) throw err;
         size = Object.values(data).length;
-        storage.set(String(size), { path: item }, (error) => {
-          if (error) throw error;
-          if (this.state.currentViewName === 'Saved directories') {
-            const { directories } = this.state;
-            directories.push(<li key={size} className="directoryItem" onClick={this.setFilePath}>{item}</li>);
-            this.setState({
-              filePath: item,
-              directories,
-            })
-          }
+        let flag = true;
+        const arr = Object.values(data);
+        arr.forEach((obj) => {
+          if (obj.path === item) flag = false;
+        });
+        if (flag) {
+          storage.set(String(size), { path: item }, (error) => {
+            if (error) throw error;
+            if (this.state.currentViewName === 'Saved directories') {
+              const { directories } = this.state;
+              directories.push(<li key={size} className="directoryItem" onClick={this.setFilePath}>{item}</li>);
+              this.setState({
+                directories,
+              });
+            }
+          });
+        }
+        this.setState({
+          filePath: item,
         });
       });
     });
@@ -160,6 +169,8 @@ class App extends Component {
       body: JSON.stringify({
         filePath: this.state.filePath,
       }),
+    }).then(() => {
+      this.psa();
     });
   }
 
