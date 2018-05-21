@@ -1,2 +1,2 @@
-# dockerviz
-a working title
+# SpinDocker
+A Docker compose visualiser and controller
