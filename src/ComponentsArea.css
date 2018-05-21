@@ -22,12 +22,18 @@
 
 #title {
   font-family: 'Roboto', sans-serif;
-  display: inline;
-  text-align: center;
+  display: block;
+  /* text-align: center; */
   position: fixed;
   margin-left: 50%;
-  margin-top: 6%;
+  /* margin-top: 10%; */
+  margin-top: 100px;
+
   font-weight: 300;
+  /* background-color: red; */
+  /* width: 100%; */
+  /* position: fixed; */
+  /* top: 0; */
 }
 
 #componentView {
@@ -59,7 +65,7 @@
 
 #headline {
   display: block;
-  position: fixed;
+  position: relative;
 }
 
 #filePathDisplay {
