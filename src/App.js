@@ -37,11 +37,12 @@ class App extends Component {
         storage.set(String(size), { path: item }, (error) => {
           if (error) throw error;
         });
+        this.getDirectories();
       });
-
       this.setState({
         filePath: item,
       });
+
     });
   }
 
