@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import keyIndex from 'react-key-index';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
 
@@ -13,6 +12,7 @@ class App extends Component {
       containers: [],
       filePath: '',
       directories: [],
+      composed: []
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
@@ -26,6 +26,7 @@ class App extends Component {
     this.getDirectories = this.getDirectories.bind(this);
     this.clearHistory = this.clearHistory.bind(this);
     this.setFilePath = this.setFilePath.bind(this);
+    this.composedInfo = this.composedInfo.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +67,7 @@ class App extends Component {
       this.setState({
         containers: [],
         currentViewName: 'Saved directories',
+        composed:[],
         directories,
       });
     });
@@ -88,7 +90,29 @@ class App extends Component {
   }
 
   showIds(arr) {
-    return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
+    // console.log(this.state.containers);
+    return this.state.containers.map(container => 
+      <div key={container['CONTAINER ID']} className="containers">
+        {/* CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS */}
+        <p className="containerText">name: {container[' PORTS']}</p>
+        <p className="containerText">ID: {container['CONTAINER ID']}</p>
+      </div>)
+  }
+
+  composedInfo() {
+    // console.log(this.state.composed);
+    if (this.state.composed.length > 0) {
+      return (
+        <div class="composeBox">
+          {this.state.composed.map(container => 
+            <div key={container['Name']} className="containers">
+              <p className="containerText">Name: {container['Name']}</p>
+              <p className="containerText">Ports: {container['Ports']}</p>
+            </div>
+          )}
+        </div>
+      )
+    }
   }
 
   handleFilePath(e) {
@@ -99,17 +123,22 @@ class App extends Component {
   }
 
   dcps() {
+    // console.log('Hello from docker-compose ps!')
     fetch('/docker-composeps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({filepathFetch: this.state.filePath}),
+      body: JSON.stringify({
+        filePath: this.state.filePath,
+      })
     }).then(res => res.json())
       .then((data) => {
+        this.ps()
         this.setState({
-          containers: data,
+          composed: data,
           currentViewName: 'Containers online',
+          directories: []
         });
       });
   }
@@ -156,7 +185,7 @@ class App extends Component {
         filePath: this.state.filePath,
       }),
     }).then(() => {
-      this.ps();
+      this.dcps();
     });
   }
 
@@ -185,6 +214,7 @@ class App extends Component {
         containers: [],
         currentViewName: 'Containers online',
         directories: [],
+        composed: []
       });
     });
   }
@@ -199,6 +229,7 @@ class App extends Component {
       <div>
         <ComponentsArea
           comIds={this.showIds()}
+          composedInfo={this.composedInfo()}
           currentViewName={this.state.currentViewName}
           filePath={this.state.filePath}
           clear={this.clearHistory}
