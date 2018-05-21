@@ -210,7 +210,9 @@ class App extends Component {
         filePath: this.state.filePath,
       }),
     }).then(() => {
-      this.psa();
+      this.setState({
+        composed:[]
+      })
     });
   }
 
