@@ -1,21 +1,25 @@
 .button {
+  display: inline-grid;
+
   width: 100%;
   height: 50px;
-  color: rgba(255, 255, 255, 0.76);
-  background-color: #333645;
-  font-size: 13px;
-  font-weight: 200;
-  font-family: 'Roboto', sans-serif;
-  display: inline-grid;
-  outline: none;
-  text-align: left;
-  padding-left: 15%;
-  border: 0;
+  padding: 10px 0 10px 40px;
   padding-top: 10%;
   padding-bottom: 1%;
-  padding: 10px 0 10px 40px;
-  transition: .5s;
+  padding-left: 15%;
+
   cursor: pointer;
+  transition: .5s;
+  text-align: left;
+
+  color: rgba(255, 255, 255, 0.76);
+  border: 0;
+  outline: none;
+  background-color: #333645;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  font-weight: 200;
 }
 
 .button:hover {
@@ -23,19 +27,23 @@
 }
 
 #openFolder {
-  background-color: rgb(244, 131, 66);
   width: 100%;
-  font-size: 1.25rem;
   height: 50px;
-  color: white;
-  font-family: 'Roboto', sans-serif;
-  outline: none;
-  border-style: none;
+
   transition: .5s;
+
+  color: white;
+  border-style: none;
+  outline: none;
+  background-color: rgb(244, 131, 66);
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
 }
 
 #openFolder:hover {
   cursor: pointer;
-  background-color: rgb(242, 180, 113);
   transition: .5s;
+
+  background-color: rgb(242, 180, 113);
 }
