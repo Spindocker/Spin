@@ -36,13 +36,16 @@ class App extends Component {
         size = Object.values(data).length;
         storage.set(String(size), { path: item }, (error) => {
           if (error) throw error;
+          if (this.state.currentViewName === 'Saved directories') {
+            const { directories } = this.state;
+            directories.push(<li key={size} className="directoryItem" onClick={this.setFilePath}>{item}</li>);
+            this.setState({
+              filePath: item,
+              directories,
+            })
+          }
         });
-        this.getDirectories();
       });
-      this.setState({
-        filePath: item,
-      });
-
     });
   }
 
