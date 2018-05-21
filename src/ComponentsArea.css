@@ -5,7 +5,8 @@
   border-radius: 5px;
   float: right;
   margin: 5px;
-  margin-top: 2.5%;
+  /* margin-top: 12%; */
+  /* margin-bottom: -10%; */
   margin-right: 15px;
   display: block;
   -webkit-box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
@@ -21,18 +22,27 @@
 
 #title {
   font-family: 'Roboto', sans-serif;
-  display: block;
+  display: inline;
   text-align: center;
+  position: fixed;
+  margin-left: 50%;
+  margin-top: 6%;
+  font-weight: 300;
 }
 
 #componentView {
   background-color: white;
   float: right;
-  height: 100%;
+  margin-top: 150px;
+  margin-left: 15%;
+  height: 86%;
   width: 85%;
   display: block;
-  top: 0;
-  overflow: hidden;
+  /* top: 0; */
+  overflow: scroll;
+  /* background-color: red; */
+  /* box-sizing: border-box; */
+  position: fixed;
 }
 
 .containerText {
@@ -49,24 +59,29 @@
 
 #headline {
   display: block;
+  position: fixed;
 }
 
 #filePathDisplay {
   font-family: 'Roboto', sans-serif;
   display: block;
   font-size: .8rem;
-  width: 100%;
-  margin-left: 10px;
+  /* width: 100%; */
+  margin-left: 16%;
+  position: fixed;
+  margin-top: 60px;
+  /* background-color: blue; */
 }
 
 .directoryItem {
   font-size: 1.25rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 200;
-  margin: 20px;
   padding: 10px;
   transition: .5s;
   cursor: pointer;
+  /* margin-top: 10%; */
+  /* margin-bottom: -10%; */
 }
 
 .directoryItem:hover {
