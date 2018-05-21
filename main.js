@@ -14,7 +14,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1600,
     height: 1200,
-    minWidth: 800,
+    minWidth: 850,
     minHeight: 600,
   });
   mainWindow.loadURL(process.env.ELECTRON_START_URL ||
