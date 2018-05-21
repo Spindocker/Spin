@@ -11,7 +11,12 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 1600, height: 1200 });
+  mainWindow = new BrowserWindow({
+    width: 1600,
+    height: 1200,
+    minWidth: 850,
+    minHeight: 600,
+  });
   mainWindow.loadURL(process.env.ELECTRON_START_URL ||
     url.format({
       pathname: path.join(__dirname, './public/index.html'),
@@ -40,6 +45,7 @@ app.on('activate', () => {
 ipcMain.on('item:add', (e) => {
   const filePath = dialog.showOpenDialog({
     properties: ['openDirectory'],
-  })[0];
-  mainWindow.webContents.send('item:add', filePath);
+  });
+  e.returnValue = false;
+  if (filePath !== undefined) mainWindow.webContents.send('item:add', filePath[0]);
 });

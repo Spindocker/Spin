@@ -1,14 +1,17 @@
 import React from 'react';
 import './ComponentsArea.css';
+import HeaderArea from './HeaderArea';
 
-const ComponentsArea = ({ comIds, currentViewName, filePath }) => (
+const ComponentsArea = ({ comIds, currentViewName, filePath, clear, directories }) => (
   <div>
+    <HeaderArea name={currentViewName} clear={clear} />
+    <div id="headline">
+      <div id="filePathDisplay"><p>Current Directory: {filePath}</p></div>
+      <h2 id="title">{currentViewName}</h2>
+    </div>
     <div id="componentView">
-      <div id="headline">
-        <div id="filePathDisplay"><p>Current Directory: {filePath}</p></div>
-        <h1 id="title">{currentViewName}</h1>
-      </div>
       {comIds}
+      <ul id="directoryList">{directories}</ul>
     </div>
   </div>
 );

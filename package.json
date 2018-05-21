@@ -1,5 +1,5 @@
 {
-  "name": "gui-app2",
+  "name": "spindocker",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -9,19 +9,21 @@
     "webpack": "webpack --watch",
     "electron": "electron ."
   },
-  "author": "",
+  "author": "Haaris-S, jmangz, RichWalker3, pkassar",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "css-loader": "^0.28.11",
     "docker-cli-js": "^2.2.0",
     "electron": "^2.0.1",
+    "electron-json-storage": "^4.1.0",
     "install": "^0.11.0",
     "nodemon": "^1.17.4",
     "npm": "^6.0.0",
     "papaparse": "^4.4.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-key-index": "^0.1.1",
     "style-loader": "^0.21.0"
   },
   "devDependencies": {
