@@ -91,26 +91,37 @@ class App extends Component {
 
   showIds(arr) {
     // console.log(this.state.containers);
-    return this.state.containers.map(container => 
-      <div key={container['CONTAINER ID']} className="containers">
-        {/* CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS */}
-        <p className="containerText">name: {container[' PORTS']}</p>
-        <p className="containerText">ID: {container['CONTAINER ID']}</p>
-      </div>)
+    if (this.state.containers.length > 0) {
+      return (
+        <div>
+          <h3 className="contLabel">Online</h3>
+          {this.state.containers.map(container => 
+            <div key={container['CONTAINER ID']} className="containers">
+              {/* CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS */}
+              <p className="containerText">name: {container[' PORTS']}</p>
+              <p className="containerText">ID: {container['CONTAINER ID']}</p>
+            </div>)
+          }
+        </div>
+      )
+    }
   }
 
   composedInfo() {
     // console.log(this.state.composed);
     if (this.state.composed.length > 0) {
       return (
-        <div class="composeBox">
-          {this.state.composed.map(container => 
-            <div key={container['Name']} className="containers">
-              <p className="containerText">Name: {container['Name']}</p>
-              <p className="containerText">Ports: {container['Ports']}</p>
-            </div>
-          )}
-        </div>
+        <div>
+          <h3 className="contLabel">Composed</h3>
+          <div class="composeBox">
+            {this.state.composed.map(container => 
+              <div key={container['Name']} className="containers">
+                <p className="containerText">Name: {container['Name']}</p>
+                <p className="containerText">Ports: {container['Ports']}</p>
+              </div>
+            )}
+          </div>
+         </div>
       )
     }
   }

@@ -11,9 +11,7 @@ const ComponentsArea = ({ comIds, currentViewName, filePath, clear, directories,
     </div>
 
     <div id="componentView">
-      {/* {console.log(composedInfo)} */}
       {composedInfo}
-      {/* <br /> */}
       {comIds}
       <ul id="directoryList">{directories}</ul>
     </div>
