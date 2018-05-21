@@ -5,12 +5,15 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon server/server.js",
+    "startYarn": "nf start -p 3333",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch",
     "electron": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "electron-start": "node src/electron-wait-react",
+    "react-start": "react-scripts start"
   },
   "author": "Haaris-S, jmangz, RichWalker3, pkassar",
   "license": "ISC",
