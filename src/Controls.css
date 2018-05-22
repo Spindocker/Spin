@@ -1,27 +1,35 @@
 #controlsBar {
-  border: 1px solid black;
+  position: fixed;
+
   width: 15%;
   height: 100%;
-  position: fixed;
+
+  border: 1px solid black;
   background-color: #333645;
 }
 
 #filePathInput {
   width: 100%;
-  border-style: 1px solid black;
+
   text-align: center;
-  font-size: 1rem;
+
+  border-style: 1px solid black;
   outline: none;
+
+  font-size: 1rem;
 }
 
 #submit {
   width: 100%;
-  text-align: center;
   padding: 30px;
-  background-color: #090C9B;
+
+  text-align: center;
+
   color: white;
-  font-size: 1.25rem;
   outline: none;
+  background-color: #090C9B;
+
+  font-size: 1.25rem;
 }
 
 #business {
