@@ -7,7 +7,6 @@ const execSync = require('child_process').execSync
 const spawn = require('child_process').spawn
 const Papa = require('papaparse')
 const path = require('path');
-const io = require('socket.io')();
 const composeController = {}
 
 composeController.ps = (req, res, next) => {
