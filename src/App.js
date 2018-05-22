@@ -116,8 +116,8 @@ class App extends Component {
 
   showImages() {
     return this.state.images.map(img => (
-      <div key={img[' IMAGE ID']} className="containers">
-        <p className="containerText">
+      <div key={img[' IMAGE ID']} className="images">
+        <p className="imageText">
           Name: {img.REPOSITORY}
           <br />
           Tag: {img[' TAG']}

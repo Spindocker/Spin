@@ -2,22 +2,56 @@
   display: block;
   float: right;
 
-  width: 250px;
+  width: 245px;
   height: 180px;
-  margin: 5px;
+  margin-top: 10px;
   margin-right: 15px;
 
   transition: .5s;
 
   border-radius: 5px;
-  background-color: #0876B4;
-  box-shadow: 7px 7px 24px -4px rgba(0, 0, 0, 0.69);
+  background-color: #B7B5E4;
+  border: 1px solid rgb(168, 154, 159);
+  box-shadow: 10px 10px 30px -15px rgba(0,0,0,0.65);
+
 }
 
 .containers:hover {
+  background-color: rgb(107, 135, 206);
+}
+
+.images {
+  display: block;
+  float: right;
+
+  width: 245px;
+  height: 180px;
+  margin-top: 10px;
+  margin-right: 15px;
+
   transition: .5s;
 
-  background-color: rgb(107, 135, 206);
+  border-radius: 5px;
+  background-color: #BBC2E2;
+  border: 1px solid rgb(168, 154, 159);
+  box-shadow: 10px 10px 30px -15px rgba(0,0,0,0.65);
+}
+
+.images:hover {
+  background-color: rgb(224, 252, 98);
+}
+
+.imageText {
+  position: relative;
+
+  padding-top: 20px;
+  padding-left: 20px;
+
+  color: rgb(47, 48, 42);
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 #title {
@@ -39,12 +73,14 @@
   float: right;
   overflow: scroll;
 
-  width: 85%;
-  height: 86%;
+  width: 83%;
+  height: 83%;
   margin-top: 150px;
-  margin-left: 15%;
+  margin-left: 16%;
 
-  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgb(255, 232, 237);
+  box-shadow: 0px 0px 30px -14px rgba(0,0,0,0.65);
 }
 
 .containerText {
@@ -53,7 +89,7 @@
   padding-top: 20px;
   padding-left: 20px;
 
-  color: white;
+  color: rgb(47, 48, 42);
 
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
