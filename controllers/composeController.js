@@ -8,6 +8,9 @@ const spawn = require('child_process').spawn
 const Papa = require('papaparse')
 const path = require('path');
 
+const io = require('socket.io')();
+// io.listen(3333);
+
 const composeController = {}
 
 composeController.ps = (req, res, next) => {

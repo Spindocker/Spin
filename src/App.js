@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
+import Console from './Console';
 
 const { ipcRenderer } = window.require('electron');
 const storage = window.require('electron-json-storage');
@@ -12,8 +13,10 @@ class App extends Component {
       containers: [],
       filePath: '',
       directories: [],
-      composed: []
+      composed: [],
+      loading: true
     };
+
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
     this.dcps = this.dcps.bind(this);
@@ -30,6 +33,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: false });
+
     ipcRenderer.on('item:add', (e, item) => {
       let size = 0;
       storage.getAll((err, data) => {
@@ -113,7 +118,7 @@ class App extends Component {
       return (
         <div>
           <h3 className="contLabel">Composed</h3>
-          <div class="composeBox">
+          <div className="composeBox">
             {this.state.composed.map(container => 
               <div key={container['Name']} className="containers">
                 <p className="containerText">Name: {container['Name']}</p>
@@ -141,10 +146,11 @@ class App extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        filePath: this.state.filePath,
+        filePath: this.state.filePath
       })
-    }).then(res => res.json())
-      .then((data) => {
+    }).then(
+        res => res.json()
+      ).then((data) => {
         this.ps()
         this.setState({
           composed: data,
@@ -187,6 +193,7 @@ class App extends Component {
   }
 
   dcup() {
+    this.setState({ loading:true });
     fetch('/dcup', {
       headers: {
         'Content-Type': 'application/json',
@@ -197,10 +204,14 @@ class App extends Component {
       }),
     }).then(() => {
       this.dcps();
+      this.setState({
+        loading: false
+      })
     });
   }
 
   dcdwn() {
+    this.setState({ loading: true });
     fetch('/dcdwn', {
       headers: {
         'Content-Type': 'application/json',
@@ -211,7 +222,8 @@ class App extends Component {
       }),
     }).then(() => {
       this.setState({
-        composed:[]
+        composed:[],
+        loading:false
       })
     });
   }
@@ -238,6 +250,8 @@ class App extends Component {
   }
 
   render() {
+    const { loading } = this.state;
+
     return (
       <div>
         <ComponentsArea
@@ -260,8 +274,8 @@ class App extends Component {
           file={this.state.filePath}
           directories={this.getDirectories}
         />
-      </div>
-    );
+        <Console loading={loading} />
+      </div>)
   }
 }
 

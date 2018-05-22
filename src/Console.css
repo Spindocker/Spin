@@ -1,0 +1,19 @@
+#console {
+    display: block;
+    position: absolute;
+    height: 5%;
+    width: 85%;
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(244,131,66, 1) 100%);
+    bottom: 0;
+    right: 0
+}
+
+#load-text {
+    bottom: 19px;
+    position: relative;
+    font-size: 24px;
+    margin-left:10px;
+    color:white;
+    font-family: 'Roboto', sans-serif;
+    float: right;
+}
