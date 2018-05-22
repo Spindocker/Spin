@@ -14,4 +14,6 @@ app.get('/dcstop', composeController.dcstp);
 app.post('/dcup', composeController.dcup);
 app.post('/dcdwn', composeController.dcdwn);
 
+app.get('/getImages', composeController.getImages);
+
 app.listen(3333, () => console.log('Listening on Port 3333!'));

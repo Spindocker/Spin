@@ -21,7 +21,21 @@ composeController.ps = (req, res, next) => {
         psData[i][' NAME'] = names;
       }
     }
+    console.log(psData);
     res.send(psData);
+  });
+};
+
+composeController.getImages = (req, res) => {
+  exec('docker images', (err, stout, sterr) => {
+    const spaces = stout.replace(/ {2,}/g, '    ');
+    const data = Papa.parse(spaces, {
+      header: true,
+      trimHeader: false,
+      delimiter: '   ',
+      skipEmptyLines: true,
+    });
+    res.send(data.data);
   });
 };
 
@@ -66,7 +80,16 @@ composeController.psa = (req, res, next) => {
       newline: '',
       skipEmptyLines: true,
     });
-    res.send(data.data);
+    const psaData = data.data;
+    for (let i = 0; i < psaData.length; i += 1) {
+      const { length } = Object.keys(psaData[i]);
+      if (length < 7) {
+        const names = psaData[i][' PORTS'];
+        delete psaData[i][' PORTS'];
+        psaData[i][' NAMES'] = names;
+      }
+    }
+    res.send(psaData);
   });
 };
 
