@@ -34,7 +34,6 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: false });
-
     ipcRenderer.on('item:add', (e, item) => {
       let size = 0;
       storage.getAll((err, data) => {
@@ -95,7 +94,6 @@ class App extends Component {
   }
 
   showIds(arr) {
-    // console.log(this.state.containers);
     if (this.state.containers.length > 0) {
       return (
         <div>
@@ -113,7 +111,6 @@ class App extends Component {
   }
 
   composedInfo() {
-    // console.log(this.state.composed);
     if (this.state.composed.length > 0) {
       return (
         <div>
@@ -139,7 +136,6 @@ class App extends Component {
   }
 
   dcps() {
-    // console.log('Hello from docker-compose ps!')
     fetch('/docker-composeps', {
       method: 'POST',
       headers: {
