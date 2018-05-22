@@ -49,18 +49,15 @@
 
 .containerText {
   position: relative;
-  top: 40%;
-  left: 50%;
 
-  float: left;
-
-  transform: translate(-50%, -50%);
-  text-align: center;
+  padding-top: 20px;
+  padding-left: 20px;
 
   color: white;
 
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
+  font-weight: 300;
 }
 
 #headline {
@@ -86,6 +83,10 @@
 
   cursor: pointer;
   transition: .5s;
+
+  border: 0;
+  outline: none;
+  background-color: white;
 
   font-family: 'Roboto', sans-serif;
   font-size: 1.25rem;
