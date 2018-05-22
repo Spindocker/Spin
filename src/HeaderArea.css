@@ -1,3 +1,30 @@
+.actionBtn {
+  position: fixed;
+
+  float: right;
+
+  margin-top: 12px;
+  margin-left: 90%;
+  padding: 5px;
+
+  cursor: pointer;
+  transition: .5s;
+
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  outline: none;
+  background-color: rgb(52, 175, 216);
+
+  font-family: "Roboto", sans-serif;
+  font-size: .85rem;
+  font-weight: 300;
+}
+
+.actionBtn:hover {
+  background-color: rgb(216, 32, 57);
+}
+
 #header {
   position: fixed;
 
