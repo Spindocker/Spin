@@ -13,6 +13,8 @@ class App extends Component {
       containers: [],
       filePath: '',
       directories: [],
+      images: [],
+      actionBtnClicked: false,
     };
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
@@ -25,6 +27,8 @@ class App extends Component {
     this.getDirectories = this.getDirectories.bind(this);
     this.clearHistory = this.clearHistory.bind(this);
     this.setFilePath = this.setFilePath.bind(this);
+    this.getImages = this.getImages.bind(this);
+    this.showImages = this.showImages.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +47,7 @@ class App extends Component {
             if (error) throw error;
             if (this.state.currentViewName === 'Saved directories') {
               const { directories } = this.state;
-              directories.push(<li key={size} className="directoryItem" onClick={this.setFilePath}>{item}</li>);
+              directories.push(<li key={size} ><button className="directoryItem" onClick={this.setFilePath} >{item}</button></li>);
               this.setState({
                 directories,
               });
@@ -61,7 +65,7 @@ class App extends Component {
     storage.getAll((error, data) => {
       if (error) throw error;
       const arr = Object.values(data);
-      const directories = arr.map((path, i) => <li key={i} className="directoryItem" onClick={this.setFilePath}>{path.path}</li>);
+      const directories = arr.map((path, i) => <li key={i}><button className="directoryItem" onClick={this.setFilePath}>{path.path}</button></li>);
       this.setState({
         containers: [],
         currentViewName: 'Saved directories',
@@ -74,7 +78,26 @@ class App extends Component {
     const filePath = e.target.innerHTML;
     this.setState({
       filePath,
+      actionBtnClicked: true,
     });
+  }
+
+  getImages() {
+    fetch('/getImages', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          currentViewName: 'Images',
+          containers: [],
+          directories: [],
+          images: data,
+        });
+      });
   }
 
   clearHistory() {
@@ -86,8 +109,26 @@ class App extends Component {
     });
   }
 
-  showIds(arr) {
-    return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' PORTS']}</p></div>);
+  showIds() {
+    return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' NAMES']}</p></div>);
+  }
+
+  showImages() {
+    return this.state.images.map(img => (
+      <div key={img[' IMAGE ID']} className="containers">
+        <p className="containerText">
+          Name: {img.REPOSITORY}
+          <br />
+          Tag: {img[' TAG']}
+          <br />
+          Image ID: {img[' IMAGE ID']}
+          <br />
+          Created: {img[' CREATED']}
+          <br />
+          Size: {img[' SIZE']}
+        </p>
+      </div>
+    ));
   }
 
   handleFilePath(e) {
@@ -105,10 +146,12 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
+        console.log(data);
         this.setState({
           containers: data,
           currentViewName: 'Containers online',
           directories: [],
+          images: [],
         });
       });
   }
@@ -121,10 +164,12 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
+        console.log(data);
         this.setState({
           containers: data,
           currentViewName: 'All containers',
           directories: [],
+          images: [],
         });
       });
   }
@@ -168,6 +213,7 @@ class App extends Component {
         containers: [],
         currentViewName: 'Containers online',
         directories: [],
+        images: [],
       });
     });
   }
@@ -186,6 +232,8 @@ class App extends Component {
           filePath={this.state.filePath}
           clear={this.clearHistory}
           directories={this.state.directories}
+          actionBtnClicked={this.state.actionBtnClicked}
+          showImages={this.showImages()}
         />
         <Controls
           fp={this.handleFilePath}
@@ -197,6 +245,7 @@ class App extends Component {
           open={this.open}
           file={this.state.filePath}
           directories={this.getDirectories}
+          getImages={this.getImages}
         />
       </div>
     );
