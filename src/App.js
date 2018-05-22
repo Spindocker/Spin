@@ -99,7 +99,7 @@ class App extends Component {
     if (this.state.containers.length > 0) {
       return (
         <div>
-          <h3 className="contLabel">Online</h3>
+          <h3 className="contLabel">Other</h3>
           {this.state.containers.map(container => 
             <div key={container['CONTAINER ID']} className="containers">
               {/* CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS */}
@@ -223,6 +223,7 @@ class App extends Component {
     }).then(() => {
       this.setState({
         composed:[],
+        containers:[],
         loading:false
       })
     });
