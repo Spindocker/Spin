@@ -6,8 +6,6 @@ const exec = require('child_process').exec
 const Papa = require('papaparse')
 const path = require('path');
 
-const io = require('socket.io')();
-
 var dockerCLI = require('docker-cli-js');
 var DockerOptions = dockerCLI.Options;
 var Docker = dockerCLI.Docker;
