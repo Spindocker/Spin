@@ -65,7 +65,9 @@ class App extends Component {
     storage.getAll((error, data) => {
       if (error) throw error;
       const arr = Object.values(data);
-      const directories = arr.map((path, i) => <li key={i}><button className="directoryItem" onClick={this.setFilePath}>{path.path}</button></li>);
+      const directories = arr.map((path, i) => (
+        <li key={i}><button className="directoryItem" onClick={this.setFilePath}>{path.path}</button></li>
+      ));
       this.setState({
         containers: [],
         currentViewName: 'Saved directories',
@@ -111,7 +113,13 @@ class App extends Component {
   }
 
   showIds() {
-    return this.state.containers.map(container => <div key={container['CONTAINER ID']} className="containers"><p className="containerText">name: {container[' NAMES']}</p></div>);
+    return this.state.containers.map(container => (
+      <div key={container['CONTAINER ID']} className="containers">
+        <p className="containerText">
+          name: {container[' NAMES']}
+        </p>
+      </div>
+    ));
   }
 
   showImages() {
