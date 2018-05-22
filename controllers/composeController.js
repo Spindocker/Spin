@@ -7,10 +7,7 @@ const execSync = require('child_process').execSync
 const spawn = require('child_process').spawn
 const Papa = require('papaparse')
 const path = require('path');
-
 const io = require('socket.io')();
-// io.listen(3333);
-
 const composeController = {}
 
 composeController.ps = (req, res, next) => {
@@ -40,7 +37,6 @@ composeController.ps = (req, res, next) => {
         psData[i][' NAME'] = names
       }
     }
-
     res.send(psData);
   })
 }
@@ -61,8 +57,6 @@ composeController.dcup = (req, res, next) => {
   }, (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
-    // res.send(sterr); // Log console messages?
-    // console.log('Hello from docker-compose ps!');
     res.end();
   });
 }
@@ -90,7 +84,6 @@ exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
     delimiter: '   ',
     skipEmptyLines: true
   });
-  // filtering = data.data
   data.data.reduce((acc, cur) => {
     const temp = []
     for (let i = 0; i < cur.length; i += 1) {
