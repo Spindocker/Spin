@@ -7,5 +7,4 @@ const Console = ({ loading }) => (
     </div>
 );
 
-
 export default Console;
