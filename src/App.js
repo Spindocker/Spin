@@ -70,6 +70,7 @@ class App extends Component {
         containers: [],
         currentViewName: 'Saved directories',
         directories,
+        images: [],
       });
     });
   }
