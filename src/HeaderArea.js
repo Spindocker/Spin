@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './HeaderArea.css';
 
-const HeaderArea = ({ name, clear, actionBtnClicked, deleteDirectory }) => {
+const HeaderArea = ({
+  name, clear, actionBtnClicked, deleteDirectory,
+}) => {
   let clearBtn = null;
   let deleteBtn = null;
   if (name === 'Saved directories') {
@@ -21,5 +24,11 @@ const HeaderArea = ({ name, clear, actionBtnClicked, deleteDirectory }) => {
   );
 };
 
+HeaderArea.propTypes = {
+  name: PropTypes.string.isRequired,
+  clear: PropTypes.func.isRequired,
+  actionBtnClicked: PropTypes.bool.isRequired,
+  deleteDirectory: PropTypes.func.isRequired,
+};
 
 export default HeaderArea;
