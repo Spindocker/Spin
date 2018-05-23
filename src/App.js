@@ -29,6 +29,7 @@ class App extends Component {
     this.setFilePath = this.setFilePath.bind(this);
     this.getImages = this.getImages.bind(this);
     this.showImages = this.showImages.bind(this);
+    this.deleteDirectory = this.deleteDirectory.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +74,7 @@ class App extends Component {
         currentViewName: 'Saved directories',
         directories,
         images: [],
+        actionBtnClicked: false,
       });
     });
   }
@@ -93,12 +95,12 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           currentViewName: 'Images',
           containers: [],
           directories: [],
           images: data,
+          actionBtnClicked: false,
         });
       });
   }
@@ -110,6 +112,11 @@ class App extends Component {
     this.setState({
       directories: [],
     });
+  }
+
+  deleteDirectory(e) {
+    console.log(e);
+    console.log('wtf');
   }
 
   showIds() {
@@ -161,6 +168,7 @@ class App extends Component {
           currentViewName: 'Containers online',
           directories: [],
           images: [],
+          actionBtnClicked: false,
         });
       });
   }
@@ -179,6 +187,7 @@ class App extends Component {
           currentViewName: 'All containers',
           directories: [],
           images: [],
+          actionBtnClicked: false,
         });
       });
   }
@@ -223,6 +232,7 @@ class App extends Component {
         currentViewName: 'Containers online',
         directories: [],
         images: [],
+        actionBtnClicked: false,
       });
     });
   }
@@ -243,6 +253,7 @@ class App extends Component {
           directories={this.state.directories}
           actionBtnClicked={this.state.actionBtnClicked}
           showImages={this.showImages()}
+          deleteDirectory={this.deleteDirectory}
         />
         <Controls
           fp={this.handleFilePath}

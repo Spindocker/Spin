@@ -2,9 +2,14 @@ import React from 'react';
 import './ComponentsArea.css';
 import HeaderArea from './HeaderArea';
 
-const ComponentsArea = ({ comIds, currentViewName, filePath, clear, directories, actionBtnClicked, showImages }) => (
+const ComponentsArea = ({ comIds, currentViewName, filePath, clear, directories, actionBtnClicked, showImages, deleteDirectory }) => (
   <div>
-    <HeaderArea name={currentViewName} clear={clear} actionBtnClicked={actionBtnClicked} />
+    <HeaderArea
+      name={currentViewName}
+      clear={clear}
+      actionBtnClicked={actionBtnClicked}
+      deleteDirectory={deleteDirectory}
+    />
     <div id="headline">
       <div id="filePathDisplay"><p>Current Directory: {filePath}</p></div>
       <h2 id="title">{currentViewName}</h2>

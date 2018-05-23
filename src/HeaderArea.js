@@ -1,13 +1,14 @@
 import React from 'react';
 import './HeaderArea.css';
 
-const HeaderArea = ({ name, clear, actionBtnClicked }) => {
+const HeaderArea = ({ name, clear, actionBtnClicked, deleteDirectory }) => {
   let clearBtn = null;
   let deleteBtn = null;
   if (name === 'Saved directories') {
     clearBtn = <button id="clearHistory" onClick={clear}>Clear history</button>;
-    if (actionBtnClicked) deleteBtn = <button className="actionBtn">Delete</button>;
+    if (actionBtnClicked) deleteBtn = <button className="actionBtn" onClick={deleteDirectory} >Delete</button>;
   }
+  if (actionBtnClicked) deleteBtn = <button className="actionBtn">Delete</button>;
   // if (name === 'Images') button = <button className="containerImgBtn" >Start</button>;
   // if (name === 'All containers') button = <button className="containerImgBtn" >Start</button>;
   return (
@@ -19,5 +20,6 @@ const HeaderArea = ({ name, clear, actionBtnClicked }) => {
     </div>
   );
 };
+
 
 export default HeaderArea;
