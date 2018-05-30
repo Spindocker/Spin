@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import keyIndex from 'react-key-index';
 import ComponentsArea from './ComponentsArea';
 import Controls from './Controls';
+import Console from './Console';
 
 const { ipcRenderer } = window.require('electron');
 const storage = window.require('electron-json-storage');
@@ -15,7 +15,10 @@ class App extends Component {
       directories: [],
       images: [],
       actionBtnClicked: false,
+      composed: [],
+      loading: true,
     };
+
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
@@ -30,9 +33,11 @@ class App extends Component {
     this.getImages = this.getImages.bind(this);
     this.showImages = this.showImages.bind(this);
     this.deleteDirectory = this.deleteDirectory.bind(this);
+    this.composedInfo = this.composedInfo.bind(this);
   }
 
   componentDidMount() {
+    this.setState({ loading: false });
     ipcRenderer.on('item:add', (e, item) => {
       let size = 0;
       storage.getAll((err, data) => {
@@ -72,6 +77,7 @@ class App extends Component {
       this.setState({
         containers: [],
         currentViewName: 'Saved directories',
+        composed:[],
         directories,
         images: [],
         actionBtnClicked: false,
@@ -115,8 +121,8 @@ class App extends Component {
   }
 
   deleteDirectory(e) {
-    console.log(e);
-    console.log('wtf');
+    // console.log(e);
+    // console.log('wtf');
   }
 
   showIds() {
@@ -153,6 +159,23 @@ class App extends Component {
         </p>
       </div>
     ));
+
+  composedInfo() {
+    if (this.state.composed.length > 0) {
+      return (
+        <div>
+          <h3 className="contLabel">Composed</h3>
+          <div className="composeBox">
+            {this.state.composed.map(container =>
+              <div key={container['Name']} className="containers">
+                <p className="containerText">Name: {container['Name']}</p>
+                <p className="containerText">Ports: {container['Ports']}</p>
+              </div>
+            )}
+          </div>
+         </div>
+      )
+    }
   }
 
   handleFilePath(e) {
@@ -160,6 +183,27 @@ class App extends Component {
     this.setState({
       filePath: e.target[0].value,
     });
+  }
+
+  dcps() {
+    fetch('/docker-composeps', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        filePath: this.state.filePath
+      })
+    }).then(
+        res => res.json()
+      ).then((data) => {
+        this.ps()
+        this.setState({
+          composed: data,
+          currentViewName: 'Containers online',
+          directories: []
+        });
+      });
   }
 
   ps() {
@@ -201,6 +245,7 @@ class App extends Component {
   }
 
   dcup() {
+    this.setState({ loading:true });
     fetch('/dcup', {
       headers: {
         'Content-Type': 'application/json',
@@ -210,11 +255,15 @@ class App extends Component {
         filePath: this.state.filePath,
       }),
     }).then(() => {
-      this.ps();
+      this.dcps();
+      this.setState({
+        loading: false
+      })
     });
   }
 
   dcdwn() {
+    this.setState({ loading: true });
     fetch('/dcdwn', {
       headers: {
         'Content-Type': 'application/json',
@@ -224,7 +273,11 @@ class App extends Component {
         filePath: this.state.filePath,
       }),
     }).then(() => {
-      this.psa();
+      this.setState({
+        composed:[],
+        containers:[],
+        loading:false
+      })
     });
   }
 
@@ -241,6 +294,7 @@ class App extends Component {
         directories: [],
         images: [],
         actionBtnClicked: false,
+        composed: [],
       });
     });
   }
@@ -251,10 +305,13 @@ class App extends Component {
   }
 
   render() {
+    const { loading } = this.state;
+
     return (
       <div>
         <ComponentsArea
           comIds={this.showIds()}
+          composedInfo={this.composedInfo()}
           currentViewName={this.state.currentViewName}
           filePath={this.state.filePath}
           clear={this.clearHistory}
@@ -275,8 +332,8 @@ class App extends Component {
           directories={this.getDirectories}
           getImages={this.getImages}
         />
-      </div>
-    );
+        <Console loading={loading} />
+      </div>)
   }
 }
 

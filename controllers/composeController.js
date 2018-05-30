@@ -21,7 +21,7 @@ composeController.ps = (req, res, next) => {
         psData[i][' NAME'] = names;
       }
     }
-    console.log(psData);
+
     res.send(psData);
   });
 };
@@ -56,6 +56,49 @@ composeController.dcdwn = (req, res, next) => {
   exec('docker-compose down', {
     cwd: filePath,
   }, (err, stout, sterr) => {
+    if (err) console.log(err);
+    if (sterr) console.log(sterr);
+    res.end();
+  });
+};
+
+
+composeController.dcps = (req, res, next) => {
+  const { filePath } = req.body;
+  const filtering = [];
+  const final = [];
+  exec('docker-compose ps', { cwd: filePath }, (err, stout, sterr) => {
+    const data = Papa.parse(stout, {
+      header: false,
+      trimHeader: false,
+      delimiter: '   ',
+      skipEmptyLines: true,
+    });
+    data.data.reduce((acc, cur) => {
+      const temp = [];
+      for (let i = 0; i < cur.length; i += 1) {
+        if (cur[i]) {
+          const trimmed = cur[i].trim();
+          temp.push(trimmed);
+        }
+      }
+      filtering.push(temp);
+      return acc;
+    }, []);
+    for (let i = 2; i < filtering.length; i += 1) {
+      const interim = {};
+      for (let k = 0; k < 4; k += 1) {
+        interim[filtering[0][k]] = filtering[i][k];
+      }
+      final.push(interim);
+    }
+    res.send(final);
+  });
+};
+
+
+composeController.dcstrt = (req, res, next) => {
+  exec('docker-compose start', (err, stout, sterr) => {
     if (err) console.log(err);
     if (sterr) console.log(sterr);
     res.end();

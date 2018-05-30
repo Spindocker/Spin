@@ -11,6 +11,7 @@
 #controlsBar {
   position: fixed;
 
+  z-index:1;
   width: 15%;
   height: 100%;
 

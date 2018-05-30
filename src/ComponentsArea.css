@@ -54,6 +54,20 @@
   font-weight: 300;
 }
 
+.composeBox {
+  height: 192px;
+  display: block;
+  background-image: linear-gradient(45deg, #FFFFFF 25%, #e7f5fe 25%, #e7f5fe 50%, #FFFFFF 50%, #FFFFFF 75%, #e7f5fe 75%, #e7f5fe 100%);
+background-size: 60.00px 60.00px;
+}
+
+.contLabel {
+  margin-left: 10px;
+  color: darkgray;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+}
+
 #title {
   position: fixed;
 
