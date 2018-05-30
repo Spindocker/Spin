@@ -159,6 +159,7 @@ class App extends Component {
         </p>
       </div>
     ));
+  }
 
   composedInfo() {
     if (this.state.composed.length > 0) {
@@ -173,8 +174,8 @@ class App extends Component {
               </div>
             )}
           </div>
-         </div>
-      )
+        </div>
+      );
     }
   }
 
