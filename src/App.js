@@ -123,7 +123,15 @@ class App extends Component {
     return this.state.containers.map(container => (
       <div key={container['CONTAINER ID']} className="containers">
         <p className="containerText">
-          name: {container[' NAMES']}
+          Name: {container[' NAMES']}
+          <br />
+          Image: {container[' IMAGE']}
+          <br />
+          ID: {container['CONTAINER ID']}
+          <br />
+          Created: {container[' CREATED']}
+          <br />
+          Status: {container[' STATUS']}
         </p>
       </div>
     ));
