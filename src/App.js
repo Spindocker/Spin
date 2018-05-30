@@ -22,6 +22,7 @@ class App extends Component {
     this.showIds = this.showIds.bind(this);
     this.ps = this.ps.bind(this);
     this.psa = this.psa.bind(this);
+    this.dcps = this.dcps.bind(this);
     this.dcup = this.dcup.bind(this);
     this.dcdwn = this.dcdwn.bind(this);
     this.stop = this.stop.bind(this);
@@ -77,7 +78,7 @@ class App extends Component {
       this.setState({
         containers: [],
         currentViewName: 'Saved directories',
-        composed:[],
+        composed: [],
         directories,
         images: [],
         actionBtnClicked: false,
@@ -175,7 +176,7 @@ class App extends Component {
             )}
           </div>
         </div>
-      );
+      )
     }
   }
 
@@ -187,23 +188,23 @@ class App extends Component {
   }
 
   dcps() {
-    fetch('/docker-composeps', {
+    fetch('/dcps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        filePath: this.state.filePath
-      })
-    }).then(
-        res => res.json()
-      ).then((data) => {
-        this.ps()
+        filePath: this.state.filePath,
+      }),
+    }).then(res => res.json())
+      .then((data) => {
+        this.ps();
         this.setState({
           composed: data,
           currentViewName: 'Containers online',
-          directories: []
+          directories: [],
         });
+        console.log(this.state.composed);
       });
   }
 
@@ -246,7 +247,7 @@ class App extends Component {
   }
 
   dcup() {
-    this.setState({ loading:true });
+    this.setState({ loading: true });
     fetch('/dcup', {
       headers: {
         'Content-Type': 'application/json',
@@ -258,8 +259,8 @@ class App extends Component {
     }).then(() => {
       this.dcps();
       this.setState({
-        loading: false
-      })
+        loading: false,
+      });
     });
   }
 
@@ -275,10 +276,10 @@ class App extends Component {
       }),
     }).then(() => {
       this.setState({
-        composed:[],
-        containers:[],
-        loading:false
-      })
+        composed: [],
+        containers: [],
+        loading: false,
+      });
     });
   }
 
