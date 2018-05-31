@@ -168,15 +168,18 @@ class App extends Component {
         <div>
           <h3 className="contLabel">Composed</h3>
           <div className="composeBox">
-            {this.state.composed.map(container =>
-              <div key={container['Name']} className="containers">
-                <p className="containerText">Name: {container['Name']}</p>
-                <p className="containerText">Ports: {container['Ports']}</p>
+            {this.state.composed.map(container => (
+              <div key={container['CONTAINER ID']} className="containers">
+                <p className="containerText">
+                  Name: {container.Name}
+                  <br />
+                  Ports: {container.Ports}
+                </p>
               </div>
-            )}
+            ))}
           </div>
         </div>
-      )
+      );
     }
   }
 
@@ -204,7 +207,6 @@ class App extends Component {
           currentViewName: 'Containers online',
           directories: [],
         });
-        console.log(this.state.composed);
       });
   }
 
@@ -216,7 +218,6 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           containers: data,
           currentViewName: 'Containers online',
@@ -235,7 +236,6 @@ class App extends Component {
       },
     }).then(res => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           containers: data,
           currentViewName: 'All containers',
@@ -335,7 +335,7 @@ class App extends Component {
           getImages={this.getImages}
         />
         <Console loading={loading} />
-      </div>)
+      </div>);
   }
 }
 
