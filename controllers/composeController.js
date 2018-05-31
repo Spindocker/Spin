@@ -21,7 +21,6 @@ composeController.ps = (req, res, next) => {
         psData[i][' NAME'] = names;
       }
     }
-
     res.send(psData);
   });
 };
@@ -62,7 +61,6 @@ composeController.dcdwn = (req, res, next) => {
   });
 };
 
-
 composeController.dcps = (req, res, next) => {
   const { filePath } = req.body;
   const filtering = [];
@@ -93,15 +91,6 @@ composeController.dcps = (req, res, next) => {
       final.push(interim);
     }
     res.send(final);
-  });
-};
-
-
-composeController.dcstrt = (req, res, next) => {
-  exec('docker-compose start', (err, stout, sterr) => {
-    if (err) console.log(err);
-    if (sterr) console.log(sterr);
-    res.end();
   });
 };
 
