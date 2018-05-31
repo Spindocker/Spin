@@ -1,0 +1,33 @@
+#console {
+    position: absolute;
+    top: 5%;
+    left: 90%;
+
+    display: block;
+}
+
+#load-text {
+    position: relative;
+
+    -webkit-animation: pulsate .5s ease-out;
+    -webkit-animation-iteration-count: infinite;
+
+    opacity: 0.5;
+    color:black;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-style: italic;
+}
+
+@-webkit-keyframes pulsate {
+    0% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.25;
+    }
+}
