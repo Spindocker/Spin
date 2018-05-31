@@ -4,7 +4,10 @@ SpinDocker is a cross-platform desktop application that visualizes images, conta
 
 ##
 <p align="center">
-  <img alt="SpinDocker Screenshot" src="https://imgur.com/a/NLPugvN">
+  <img alt="SpinDocker Screenshot" src="https://imgur.com/VXmACdN">
+  <img alt="SpinDocker Screenshot" src="https://imgur.com/OuL2pxC">
+  <img alt="SpinDocker Screenshot" src="https://imgur.com/cIB8LgB">
+  <img alt="SpinDocker Screenshot" src="https://imgur.com/GffOCBr">
 </p>
 
 ## Simple and fast visualization
