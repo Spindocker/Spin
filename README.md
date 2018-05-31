@@ -19,4 +19,4 @@ with an easy to access control side bar.
 Composing apps from .yml files can be time consuming due to constantly changing directories. With SpinDocker developers and non-developers can simply save directories where their projects are located for easy app startup.
 
 ## Contributors
-[Haarris Siddiqui](https://github.com/Haaris-S) | [Eric Chou](https://github.com/jmangz) | [Rich Walker](https://github.com/RichWalker3) | [Paul Kassar](https://github.com/pkassar)
+[Haaris Siddiqui](https://github.com/Haaris-S) | [Eric Chou](https://github.com/jmangz) | [Rich Walker](https://github.com/RichWalker3) | [Paul Kassar](https://github.com/pkassar)
