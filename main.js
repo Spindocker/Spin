@@ -10,7 +10,22 @@ const {
 const port = 3333;
 process.env.ELECTRON_START_URL = `http://localhost:${port}`;
 const client = new net.Socket();
-exec('npm start');
+const child = exec('npm start', (err, stdout, stderr) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(stdout);
+  console.log(stderr);
+});
+
+child.stdout.on('data', (data) => {
+  console.log(data);
+});
+
+child.stderr.on('data', (error) => {
+  console.log(error);
+});
 let startedElectron = false;
 let mainWindow;
 
@@ -49,11 +64,19 @@ function createWindow() {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  console.log('POOP');
+  exec('kill $(lsof -t -i:3333)');
+  if (process.platform === 'darwin') {
     app.quit();
   }
+  app.quit();
 });
 
+app.on('quit', () => {
+  exec('kill $(lsof -t -i:3333)');
+  console.log('paPOOP');
+  app.quit();
+});
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
