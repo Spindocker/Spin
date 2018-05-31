@@ -1,19 +1,33 @@
 #console {
-    display: block;
     position: absolute;
-    height: 5%;
-    width: 85%;
-    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(244,131,66, 1) 100%);
-    bottom: 0;
-    right: 0
+    top: 5%;
+    left: 90%;
+
+    display: block;
 }
 
 #load-text {
-    bottom: 19px;
     position: relative;
-    font-size: 24px;
-    margin-left:10px;
-    color:white;
+
+    -webkit-animation: pulsate .5s ease-out;
+    -webkit-animation-iteration-count: infinite;
+
+    opacity: 0.5;
+    color:black;
+
     font-family: 'Roboto', sans-serif;
-    float: right;
+    font-size: 2rem;
+    font-style: italic;
+}
+
+@-webkit-keyframes pulsate {
+    0% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.25;
+    }
 }
