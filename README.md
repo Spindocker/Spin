@@ -1,4 +1,5 @@
 # SpinDocker
+
 SpinDocker is a cross-platform desktop application that visualizes images, containers and multi-container apps. The goal of the app is to solve issues regarding lack of support for Docker compose and visualizing multi-container apps.
 
 
