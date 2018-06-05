@@ -10,12 +10,16 @@ with an easy to access control side bar.
 ##
 <p align="center">
   <img alt="SpinDocker Screenshot" src="https://i.imgur.com/VXmACdN.png">
-  <img alt="SpinDocker Screenshot" src="https://i.imgur.com/aMFAovb.png">
-  <img alt="SpinDocker Screenshot" src="https://i.imgur.com/GffOCBr.png">
 </p>
 
 ## Saved Directories
 Composing apps from .yml files can be time consuming due to constantly changing directories. With Spin developers and non-developers can simply save directories where their projects are located for easy app startup.
+
+<p align="center">
+  <img alt="SpinDocker Screenshot" src="https://i.imgur.com/aMFAovb.png">
+  <img alt="SpinDocker Screenshot" src="https://i.imgur.com/GffOCBr.png">
+</p>
+
 
 ## Cross-platform Compatible
 Spin is built in Electron, achieving cross-platform Desktop compatibility with a DevOps tool that is a fitting addition to any Docker suite.
