@@ -1,6 +1,6 @@
 
 <p align="left">
-  <img alt="Spin logo" src="https://bit.ly/2JMojAy">
+  <img alt="Spin logo" src="https://www.dropbox.com/s/088kb4xu3n044tr/mockup.png?dl=0">
 </p>
 
 # Spin
