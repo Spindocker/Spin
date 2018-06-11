@@ -1,4 +1,7 @@
-![alt text]https://bit.ly/2JMojAy
+
+<p align="left">
+  <img alt="Spin logo" src="https://bit.ly/2JMojAy">
+</p>
 # Spin
 Because Docker is in wide use at the enterprise level by many professionals from developers to I.T. technicians, there’s a strong use case for an easy-to-use and effective Docker GUI. However, the most heavily utilized Docker GUI lacks Docker Compose functionality. Seeing that Compose is a critical component of the Docker ecosystem, we sought to remedy this problem.
 
